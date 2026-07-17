@@ -1,114 +1,140 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [email, setEmail] = useState('user@example.com')
+  const [password, setPassword] = useState('user123')
+  const [currentUser, setCurrentUser] = useState(null)
+  const [message, setMessage] = useState('')
+  const [loading, setLoading] = useState(false)
+
+  async function loadCurrentUser() {
+    const response = await fetch('/api/auth/me', {
+      credentials: 'include',
+    })
+
+    if (!response.ok) {
+      setCurrentUser(null)
+      return
+    }
+
+    setCurrentUser(await response.json())
+  }
+
+  useEffect(() => {
+    loadCurrentUser()
+  }, [])
+
+  async function login(event) {
+    event.preventDefault()
+    setLoading(true)
+    setMessage('')
+
+    const body = new URLSearchParams()
+    body.set('username', email)
+    body.set('password', password)
+
+    const response = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body,
+      credentials: 'include',
+    })
+
+    const data = await response.json().catch(() => ({}))
+    setMessage(data.message ?? (response.ok ? 'Login successful' : 'Login failed'))
+
+    if (response.ok) {
+      await loadCurrentUser()
+    }
+
+    setLoading(false)
+  }
+
+  async function logout() {
+    setLoading(true)
+    setMessage('')
+
+    const response = await fetch('/api/auth/logout', {
+      method: 'POST',
+      credentials: 'include',
+    })
+
+    const data = await response.json().catch(() => ({}))
+    setMessage(data.message ?? 'Logout complete')
+    setCurrentUser(null)
+    setLoading(false)
+  }
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <div className="base" aria-hidden="true">Shop</div>
+    <main className="auth-page">
+      <section className="auth-panel" aria-labelledby="auth-title">
+        <div className="brand-row">
+          <div className="brand-mark" aria-hidden="true">ES</div>
+          <div>
+            <h1 id="auth-title">Ecommerce Shop</h1>
+            <p>Sign in to manage your cart, orders, and checkout.</p>
+          </div>
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
+
+        {currentUser ? (
+          <div className="session-box">
+            <div>
+              <span className="label">Signed in as</span>
+              <strong>{currentUser.username}</strong>
+            </div>
+            <div className="roles">
+              {currentUser.roles.map((role) => (
+                <span key={role}>{role.replace('ROLE_', '')}</span>
+              ))}
+            </div>
+            <button type="button" onClick={logout} disabled={loading}>
+              Log out
+            </button>
+          </div>
+        ) : (
+          <form className="login-form" onSubmit={login}>
+            <label>
+              Email
+              <input
+                type="email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                autoComplete="username"
+                required
+              />
+            </label>
+            <label>
+              Password
+              <input
+                type="password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                autoComplete="current-password"
+                required
+              />
+            </label>
+            <button type="submit" disabled={loading}>
+              Log in
+            </button>
+          </form>
+        )}
+
+        {!currentUser && (
+          <>
+            <div className="divider"><span>or</span></div>
+            <div className="oauth-actions">
+              <a href="/oauth2/authorization/google">Continue with Google</a>
+              <a href="/oauth2/authorization/github">Continue with GitHub</a>
+            </div>
+          </>
+        )}
+
+        {message && <p className="message" role="status">{message}</p>}
       </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+    </main>
   )
 }
 

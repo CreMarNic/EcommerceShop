@@ -2,6 +2,7 @@ package org.example.backend.security;
 
 import java.util.HashSet;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +30,8 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(
             HttpSecurity http,
-            ObjectProvider<ClientRegistrationRepository> clientRegistrationRepository
+            ObjectProvider<ClientRegistrationRepository> clientRegistrationRepository,
+            @Value("${app.frontend-url:http://localhost:5173}") String frontendUrl
     ) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
@@ -88,7 +90,7 @@ public class SecurityConfig {
 
         if (clientRegistrationRepository.getIfAvailable() != null) {
             http.oauth2Login(oauth2 -> oauth2
-                    .defaultSuccessUrl("/api/auth/me", true)
+                    .defaultSuccessUrl(frontendUrl, true)
                     .userInfoEndpoint(userInfo -> userInfo
                             .userAuthoritiesMapper(oauthUserAuthoritiesMapper())
                     )
