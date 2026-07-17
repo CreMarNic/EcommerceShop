@@ -1,9 +1,12 @@
 package org.example.backend.web;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +18,18 @@ public class AuthDemoController {
     @GetMapping("/public/health")
     Map<String, String> publicHealth() {
         return Map.of("status", "ok");
+    }
+
+    @GetMapping("/auth/me")
+    Map<String, Object> authenticatedUser(Authentication authentication) {
+        List<String> roles = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .toList();
+
+        return Map.of(
+                "username", authentication.getName(),
+                "roles", roles
+        );
     }
 
     @GetMapping("/user/me")
