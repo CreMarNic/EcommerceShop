@@ -1,10 +1,13 @@
 .idea
 *.iml
+/data/
 
 #Backend
 
 /backend/HELP.md
 /backend/target/
+/backend/data/
+/backend/node_modules/
 /backend/.mvn/wrapper/maven-wrapper.jar
 /backend/!**/src/main/**/target/
 /backend/!**/src/test/**/target/

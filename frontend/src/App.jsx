@@ -1,140 +1,40 @@
-import { useEffect, useState } from 'react'
-import './App.css'
+import { useState } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { clearAuth, getStoredUser, hasStoredAuth } from './api/ecommerceApi'
+import { HomePage } from './components/HomePage'
+import { CheckoutPage } from './components/CheckoutPage'
+import { OrdersPage } from './components/OrdersPage'
+import { SignInPage } from './components/SignInPage'
+import { TrackingPage } from './components/TrackingPage'
 
 function App() {
-  const [email, setEmail] = useState('user@example.com')
-  const [password, setPassword] = useState('user123')
-  const [currentUser, setCurrentUser] = useState(null)
-  const [message, setMessage] = useState('')
-  const [loading, setLoading] = useState(false)
+  const [authenticated, setAuthenticated] = useState(hasStoredAuth())
+  const [user, setUser] = useState(getStoredUser())
 
-  async function loadCurrentUser() {
-    const response = await fetch('/api/auth/me', {
-      credentials: 'include',
-    })
-
-    if (!response.ok) {
-      setCurrentUser(null)
-      return
-    }
-
-    setCurrentUser(await response.json())
+  function handleAuthenticated(authenticatedUser) {
+    setUser(authenticatedUser)
+    setAuthenticated(true)
   }
 
-  useEffect(() => {
-    loadCurrentUser()
-  }, [])
-
-  async function login(event) {
-    event.preventDefault()
-    setLoading(true)
-    setMessage('')
-
-    const body = new URLSearchParams()
-    body.set('username', email)
-    body.set('password', password)
-
-    const response = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body,
-      credentials: 'include',
-    })
-
-    const data = await response.json().catch(() => ({}))
-    setMessage(data.message ?? (response.ok ? 'Login successful' : 'Login failed'))
-
-    if (response.ok) {
-      await loadCurrentUser()
-    }
-
-    setLoading(false)
+  function handleLogout() {
+    clearAuth()
+    setUser(null)
+    setAuthenticated(false)
   }
 
-  async function logout() {
-    setLoading(true)
-    setMessage('')
-
-    const response = await fetch('/api/auth/logout', {
-      method: 'POST',
-      credentials: 'include',
-    })
-
-    const data = await response.json().catch(() => ({}))
-    setMessage(data.message ?? 'Logout complete')
-    setCurrentUser(null)
-    setLoading(false)
+  if (!authenticated) {
+    return <SignInPage onAuthenticated={handleAuthenticated} />
   }
 
   return (
-    <main className="auth-page">
-      <section className="auth-panel" aria-labelledby="auth-title">
-        <div className="brand-row">
-          <div className="brand-mark" aria-hidden="true">ES</div>
-          <div>
-            <h1 id="auth-title">Ecommerce Shop</h1>
-            <p>Sign in to manage your cart, orders, and checkout.</p>
-          </div>
-        </div>
-
-        {currentUser ? (
-          <div className="session-box">
-            <div>
-              <span className="label">Signed in as</span>
-              <strong>{currentUser.username}</strong>
-            </div>
-            <div className="roles">
-              {currentUser.roles.map((role) => (
-                <span key={role}>{role.replace('ROLE_', '')}</span>
-              ))}
-            </div>
-            <button type="button" onClick={logout} disabled={loading}>
-              Log out
-            </button>
-          </div>
-        ) : (
-          <form className="login-form" onSubmit={login}>
-            <label>
-              Email
-              <input
-                type="email"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-                autoComplete="username"
-                required
-              />
-            </label>
-            <label>
-              Password
-              <input
-                type="password"
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-                autoComplete="current-password"
-                required
-              />
-            </label>
-            <button type="submit" disabled={loading}>
-              Log in
-            </button>
-          </form>
-        )}
-
-        {!currentUser && (
-          <>
-            <div className="divider"><span>or</span></div>
-            <div className="oauth-actions">
-              <a href="/oauth2/authorization/google">Continue with Google</a>
-              <a href="/oauth2/authorization/github">Continue with GitHub</a>
-            </div>
-          </>
-        )}
-
-        {message && <p className="message" role="status">{message}</p>}
-      </section>
-    </main>
+      <BrowserRouter>
+        <Routes>
+            <Route path="/" element={<HomePage user={user} onLogout={handleLogout} />} />
+            <Route path="/checkout" element={<CheckoutPage user={user} onLogout={handleLogout} />} />
+            <Route path="/orders" element={<OrdersPage user={user} onLogout={handleLogout} />} />
+            <Route path="/tracking" element={<TrackingPage user={user} onLogout={handleLogout} />} />
+        </Routes>
+      </BrowserRouter>
   )
 }
 
