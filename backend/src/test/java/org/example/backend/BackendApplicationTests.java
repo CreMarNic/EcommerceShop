@@ -3,11 +3,11 @@ package org.example.backend;
 import org.example.backend.dto.CartDTO;
 import org.example.backend.dto.OrderDTO;
 import org.example.backend.dto.ProductDTO;
-import org.example.backend.dto.ProductRequest;
 import org.example.backend.dto.UserCreateRequest;
 import org.example.backend.dto.UserResponse;
 import org.example.backend.exceptions.APIException;
 import org.example.backend.model.OrderStatus;
+import org.example.backend.model.Product;
 import org.example.backend.model.User;
 import org.example.backend.repository.ProductRepository;
 import org.example.backend.repository.UserRepository;
@@ -71,7 +71,8 @@ class BackendApplicationTests {
 
     @Test
     void productCrudWorks() {
-        ProductDTO createdProduct = productService.createProduct(new ProductRequest(
+        ProductDTO createdProduct = productService.createProduct(new Product(
+                null,
                 "Test Product",
                 "A product used by integration tests",
                 new BigDecimal("12.50"),
@@ -81,7 +82,8 @@ class BackendApplicationTests {
                 7
         ));
 
-        ProductDTO updatedProduct = productService.updateProduct(new ProductRequest(
+        ProductDTO updatedProduct = productService.updateProduct(new Product(
+                null,
                 "Updated Product",
                 "Updated description",
                 new BigDecimal("15.00"),
@@ -103,7 +105,8 @@ class BackendApplicationTests {
                 "cart-user-" + System.nanoTime() + "@example.com",
                 "secret123"
         ));
-        ProductDTO product = productService.createProduct(new ProductRequest(
+        ProductDTO product = productService.createProduct(new Product(
+                null,
                 "Checkout Product",
                 "Checkout test product",
                 new BigDecimal("20.00"),
@@ -131,7 +134,8 @@ class BackendApplicationTests {
                 "cancel-user-" + System.nanoTime() + "@example.com",
                 "secret123"
         ));
-        ProductDTO product = productService.createProduct(new ProductRequest(
+        ProductDTO product = productService.createProduct(new Product(
+                null,
                 "Cancel Product",
                 "Cancel test product",
                 new BigDecimal("5.00"),
@@ -156,7 +160,8 @@ class BackendApplicationTests {
                 "stock-user-" + System.nanoTime() + "@example.com",
                 "secret123"
         ));
-        ProductDTO product = productService.createProduct(new ProductRequest(
+        ProductDTO product = productService.createProduct(new Product(
+                null,
                 "Low Stock Product",
                 "Low stock test product",
                 new BigDecimal("9.99"),

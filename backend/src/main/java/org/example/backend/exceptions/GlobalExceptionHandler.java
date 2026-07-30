@@ -1,6 +1,5 @@
 package org.example.backend.exceptions;
 
-import org.example.backend.dto.APIResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -30,19 +29,19 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<APIResponse> handleResourceNotFoundException(ResourceNotFoundException e) {
-        return new ResponseEntity<>(new APIResponse(e.getMessage(), false), HttpStatus.NOT_FOUND);
+    public ResponseEntity<Map<String, Object>> handleResourceNotFoundException(ResourceNotFoundException e) {
+        return new ResponseEntity<>(Map.of("message", e.getMessage(), "status", false), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(APIException.class)
-    public ResponseEntity<APIResponse> handleAPIException(APIException e) {
-        return new ResponseEntity<>(new APIResponse(e.getMessage(), false), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<Map<String, Object>> handleAPIException(APIException e) {
+        return new ResponseEntity<>(Map.of("message", e.getMessage(), "status", false), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    public ResponseEntity<APIResponse> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
+    public ResponseEntity<Map<String, Object>> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
         String message = "Invalid value for parameter: " + e.getName();
-        return new ResponseEntity<>(new APIResponse(message, false), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(Map.of("message", message, "status", false), HttpStatus.BAD_REQUEST);
     }
 }
 
