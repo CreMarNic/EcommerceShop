@@ -13,7 +13,6 @@ import org.example.backend.repository.CartRepository;
 import org.example.backend.repository.ProductRepository;
 import org.example.backend.repository.UserRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -39,27 +38,25 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    @Transactional
     public CartDTO getCartByUserId(Long userId) {
         Cart cart = getOrCreateCart(userId);
         return toDTO(cart);
     }
 
     @Override
-    @Transactional
     public CartDTO addItem(Long userId, Long productId, Integer quantity) {
         validateQuantity(quantity);
         Cart cart = getOrCreateCart(userId);
         Product product = getProduct(productId);
 
-        CartItem cartItem = cartItemRepository.findByCartIdAndProductId(cart.getId(), productId)
-                .orElseGet(() -> {
-                    CartItem newItem = new CartItem();
-                    newItem.setCart(cart);
-                    newItem.setProduct(product);
-                    newItem.setQuantity(0);
-                    return newItem;
-                });
+        CartItem cartItem = cartItemRepository.findByCartIdAndProductId(cart.getId(), productId);
+
+        if (cartItem == null) {
+            cartItem = new CartItem();
+            cartItem.setCart(cart);
+            cartItem.setProduct(product);
+            cartItem.setQuantity(0);
+        }
 
         cartItem.setQuantity(cartItem.getQuantity() + quantity);
         cartItemRepository.save(cartItem);
@@ -68,12 +65,14 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    @Transactional
     public CartDTO updateItemQuantity(Long userId, Long productId, Integer quantity) {
         validateQuantity(quantity);
         Cart cart = getOrCreateCart(userId);
-        CartItem cartItem = cartItemRepository.findByCartIdAndProductId(cart.getId(), productId)
-                .orElseThrow(() -> new ResourceNotFoundException("Cart item", "productId", productId));
+        CartItem cartItem = cartItemRepository.findByCartIdAndProductId(cart.getId(), productId);
+
+        if (cartItem == null) {
+            throw new ResourceNotFoundException("Cart item", "productId", productId);
+        }
 
         cartItem.setQuantity(quantity);
         cartItemRepository.save(cartItem);
@@ -82,30 +81,35 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    @Transactional
     public CartDTO removeItem(Long userId, Long productId) {
         Cart cart = getOrCreateCart(userId);
-        CartItem cartItem = cartItemRepository.findByCartIdAndProductId(cart.getId(), productId)
-                .orElseThrow(() -> new ResourceNotFoundException("Cart item", "productId", productId));
+        CartItem cartItem = cartItemRepository.findByCartIdAndProductId(cart.getId(), productId);
+
+        if (cartItem == null) {
+            throw new ResourceNotFoundException("Cart item", "productId", productId);
+        }
 
         cartItemRepository.delete(cartItem);
         return toDTO(cart);
     }
 
     @Override
-    @Transactional
     public void clearCart(Long userId) {
         Cart cart = getOrCreateCart(userId);
         cartItemRepository.deleteByCartId(cart.getId());
     }
 
     private Cart getOrCreateCart(Long userId) {
-        return cartRepository.findByUserId(userId)
-                .orElseGet(() -> {
-                    User user = userRepository.findById(userId)
-                            .orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
-                    return cartRepository.save(new Cart(null, user));
-                });
+        Cart cart = cartRepository.findByUserId(userId);
+
+        if (cart != null) {
+            return cart;
+        }
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
+
+        return cartRepository.save(new Cart(null, user));
     }
 
     private Product getProduct(Long productId) {

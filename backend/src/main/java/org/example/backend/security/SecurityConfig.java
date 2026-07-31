@@ -1,7 +1,7 @@
 package org.example.backend.security;
 
-import org.example.backend.repository.UserRepository;
 import jakarta.servlet.http.HttpServletResponse;
+import org.example.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -81,20 +80,24 @@ public class SecurityConfig {
             @Value("${app.admin.username:admin@example.com}") String adminUsername,
             @Value("${app.admin.password:admin123}") String adminPassword
     ) {
-        return username -> userRepository.findByEmail(username)
-                .map(user -> User.withUsername(user.getEmail())
+        return username -> {
+            org.example.backend.model.User user = userRepository.findByEmail(username);
+
+            if (user != null) {
+                return org.springframework.security.core.userdetails.User.withUsername(user.getEmail())
                         .password(user.getPassword())
                         .roles(user.getEmail().equals(adminUsername) ? "ADMIN" : "USER")
-                        .build())
-                .orElseGet(() -> {
-                    if (username.equals(adminUsername)) {
-                        return User.withUsername(adminUsername)
-                                .password(passwordEncoder.encode(adminPassword))
-                                .roles("ADMIN")
-                                .build();
-                    }
+                        .build();
+            }
 
-                    throw new UsernameNotFoundException("User not found: " + username);
-                });
+            if (username.equals(adminUsername)) {
+                return org.springframework.security.core.userdetails.User.withUsername(adminUsername)
+                        .password(passwordEncoder.encode(adminPassword))
+                        .roles("ADMIN")
+                        .build();
+            }
+
+            throw new UsernameNotFoundException("User not found: " + username);
+        };
     }
 }

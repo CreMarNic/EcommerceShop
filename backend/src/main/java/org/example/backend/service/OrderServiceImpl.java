@@ -17,7 +17,6 @@ import org.example.backend.repository.OrderRepository;
 import org.example.backend.repository.ProductRepository;
 import org.example.backend.repository.UserRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -49,7 +48,6 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<OrderDTO> getAllOrders() {
         return orderRepository.findAll().stream()
                 .map(this::toDTO)
@@ -57,7 +55,6 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<OrderDTO> getOrdersByUserId(Long userId) {
         userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
@@ -68,16 +65,18 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public OrderDTO getOrderById(Long orderId) {
         return toDTO(findOrderById(orderId));
     }
 
     @Override
-    @Transactional
     public OrderDTO checkoutCart(Long userId) {
-        Cart cart = cartRepository.findByUserId(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("Cart", "userId", userId));
+        Cart cart = cartRepository.findByUserId(userId);
+
+        if (cart == null) {
+            throw new ResourceNotFoundException("Cart", "userId", userId);
+        }
+
         List<CartItem> cartItems = cartItemRepository.findByCartId(cart.getId());
 
         if (cartItems.isEmpty()) {
@@ -113,7 +112,6 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    @Transactional
     public OrderDTO updateOrderStatus(Long orderId, OrderStatus status) {
         Order order = findOrderById(orderId);
         OrderStatus oldStatus = order.getStatus();
@@ -135,7 +133,6 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    @Transactional
     public void deleteOrder(Long orderId) {
         Order order = findOrderById(orderId);
         if (order.getStatus() != OrderStatus.PENDING && order.getStatus() != OrderStatus.CANCELLED) {

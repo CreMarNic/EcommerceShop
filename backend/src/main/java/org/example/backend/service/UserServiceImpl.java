@@ -36,9 +36,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse createUser(UserCreateRequest request) {
-        userRepository.findByEmail(request.getEmail()).ifPresent(user -> {
+        User userWithSameEmail = userRepository.findByEmail(request.getEmail());
+
+        if (userWithSameEmail != null) {
             throw new APIException("User with email " + request.getEmail() + " already exists");
-        });
+        }
 
         User user = new User();
         user.setName(request.getName());
@@ -51,11 +53,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse updateUser(UserCreateRequest request, Long userId) {
         User existingUser = findUserById(userId);
-        userRepository.findByEmail(request.getEmail())
-                .filter(user -> !user.getId().equals(userId))
-                .ifPresent(user -> {
-                    throw new APIException("User with email " + request.getEmail() + " already exists");
-                });
+        User userWithSameEmail = userRepository.findByEmail(request.getEmail());
+
+        if (userWithSameEmail != null && !userWithSameEmail.getId().equals(userId)) {
+            throw new APIException("User with email " + request.getEmail() + " already exists");
+        }
 
         existingUser.setName(request.getName());
         existingUser.setEmail(request.getEmail());

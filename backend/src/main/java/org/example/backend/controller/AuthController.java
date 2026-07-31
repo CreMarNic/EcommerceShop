@@ -1,5 +1,6 @@
 package org.example.backend.controller;
 
+import org.example.backend.model.User;
 import org.example.backend.repository.UserRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -21,13 +22,18 @@ public class AuthController {
 
     @GetMapping("/me")
     public ResponseEntity<Map<String, Object>> me(Authentication authentication) {
-        Map<String, Object> response = userRepository.findByEmail(authentication.getName())
-                .<Map<String, Object>>map(user -> Map.of(
-                        "id", user.getId(),
-                        "username", user.getEmail(),
-                        "name", user.getName()
-                ))
-                .orElseGet(() -> Map.of("username", authentication.getName()));
+        User user = userRepository.findByEmail(authentication.getName());
+        Map<String, Object> response;
+
+        if (user == null) {
+            response = Map.of("username", authentication.getName());
+        } else {
+            response = Map.of(
+                    "id", user.getId(),
+                    "username", user.getEmail(),
+                    "name", user.getName()
+            );
+        }
 
         return ResponseEntity.ok(response);
     }

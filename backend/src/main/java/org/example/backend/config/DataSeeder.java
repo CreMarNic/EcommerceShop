@@ -23,7 +23,7 @@ public class DataSeeder {
             @Value("${app.admin.password:admin123}") String adminPassword
     ) {
         return args -> {
-            if (userRepository.findByEmail(adminUsername).isPresent()) {
+            if (userRepository.findByEmail(adminUsername) != null) {
                 return;
             }
 
