@@ -89,7 +89,9 @@ public class OrderServiceImpl implements OrderService {
         order = orderRepository.save(order);
 
         for (CartItem cartItem : cartItems) {
-            Product product = cartItem.getProduct();
+            Long productId = cartItem.getProduct().getId();
+            Product product = productRepository.findById(productId)
+                    .orElseThrow(() -> new ResourceNotFoundException("Product", "id", productId));
             Integer quantity = cartItem.getQuantity();
 
             if (product.getStock() < quantity) {
@@ -107,7 +109,7 @@ public class OrderServiceImpl implements OrderService {
             orderItemRepository.save(orderItem);
         }
 
-        cartItemRepository.deleteByCartId(cart.getId());
+        cartItemRepository.deleteAll(cartItems);
         return toDTO(order);
     }
 
@@ -149,7 +151,9 @@ public class OrderServiceImpl implements OrderService {
     private void restoreStock(Order order) {
         List<OrderItem> items = orderItemRepository.findByOrderId(order.getId());
         for (OrderItem item : items) {
-            Product product = item.getProduct();
+            Long productId = item.getProduct().getId();
+            Product product = productRepository.findById(productId)
+                    .orElseThrow(() -> new ResourceNotFoundException("Product", "id", productId));
             product.setStock(product.getStock() + item.getQuantity());
             productRepository.save(product);
         }
@@ -174,7 +178,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     private OrderItemDTO toDTO(OrderItem orderItem) {
-        Product product = orderItem.getProduct();
+        Long productId = orderItem.getProduct().getId();
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new ResourceNotFoundException("Product", "id", productId));
 
         return new OrderItemDTO(
                 orderItem.getId(),

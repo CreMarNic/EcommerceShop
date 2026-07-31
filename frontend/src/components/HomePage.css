@@ -106,23 +106,6 @@
   margin-bottom: 5px;
 }
 
-.home-page .product-rating-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.home-page .product-rating-stars {
-  width: 100px;
-  margin-right: 6px;
-}
-
-.home-page .product-rating-count {
-  color: rgb(37, 99, 235);
-  cursor: auto;
-  margin-top: 3px;
-}
-
 .home-page .product-price {
   font-weight: 700;
   margin-bottom: 10px;

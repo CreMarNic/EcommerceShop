@@ -7,8 +7,6 @@ export type Product = {
     price: number;
     stock: number;
     imageUrl?: string;
-    ratingStars?: number;
-    ratingCount?: number;
 };
 
 export type User = {

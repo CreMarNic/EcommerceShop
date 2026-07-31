@@ -79,16 +79,6 @@ export function HomePage({ user, onLogout }: HomePageProps) {
                                     {product.name}
                                 </div>
 
-                                <div className="product-rating-container">
-                                    <img
-                                        className="product-rating-stars"
-                                        src={`images/ratings/rating-${(product.ratingStars ?? 0) * 10}.png`}
-                                    />
-                                    <div className="product-rating-count link-primary">
-                                        {product.ratingCount ?? 0}
-                                    </div>
-                                </div>
-
                                 <div className="product-price">
                                     €{Number(product.price).toFixed(2)}
                                 </div>

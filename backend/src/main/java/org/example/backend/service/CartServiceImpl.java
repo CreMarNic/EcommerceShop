@@ -96,7 +96,8 @@ public class CartServiceImpl implements CartService {
     @Override
     public void clearCart(Long userId) {
         Cart cart = getOrCreateCart(userId);
-        cartItemRepository.deleteByCartId(cart.getId());
+        List<CartItem> cartItems = cartItemRepository.findByCartId(cart.getId());
+        cartItemRepository.deleteAll(cartItems);
     }
 
     private Cart getOrCreateCart(Long userId) {
@@ -136,7 +137,9 @@ public class CartServiceImpl implements CartService {
     }
 
     private CartItemDTO toDTO(CartItem cartItem) {
-        Product product = cartItem.getProduct();
+        Long productId = cartItem.getProduct().getId();
+        Product product = getProduct(productId);
+
         return new CartItemDTO(
                 cartItem.getId(),
                 product.getId(),

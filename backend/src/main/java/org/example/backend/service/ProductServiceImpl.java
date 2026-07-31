@@ -51,8 +51,6 @@ public class ProductServiceImpl implements ProductService {
         existingProduct.setPrice(product.getPrice());
         existingProduct.setStock(product.getStock());
         existingProduct.setImageUrl(product.getImageUrl());
-        existingProduct.setRatingStars(product.getRatingStars());
-        existingProduct.setRatingCount(product.getRatingCount());
 
         return toDTO(productRepository.save(existingProduct));
     }
@@ -75,9 +73,7 @@ public class ProductServiceImpl implements ProductService {
                 product.getDescription(),
                 product.getPrice(),
                 product.getStock(),
-                product.getImageUrl(),
-                product.getRatingStars(),
-                product.getRatingCount()
+                product.getImageUrl()
         );
     }
 
