@@ -15,6 +15,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.util.StringUtils;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -27,19 +29,20 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .csrf(AbstractHttpConfigurer::disable)
+                .csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .cors(Customizer.withDefaults())
                 .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
                 .httpBasic(httpBasic -> httpBasic.authenticationEntryPoint(restAuthenticationEntryPoint()))
                 .formLogin(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/h2-console/**").permitAll()
+                        .requestMatchers("/h2-console/**").hasRole("ADMIN")
+                        .requestMatchers("/api/csrf").permitAll()
                         .requestMatchers("/api/public/**").permitAll()
                         .requestMatchers("/api/auth/me").authenticated()
                         .requestMatchers("/api/users/**").authenticated()
                         .requestMatchers("/api/orders/**").authenticated()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                        .anyRequest().permitAll()
+                        .anyRequest().authenticated()
                 )
                 .build();
     }
@@ -78,7 +81,7 @@ public class SecurityConfig {
             UserRepository userRepository,
             PasswordEncoder passwordEncoder,
             @Value("${app.admin.username:admin@example.com}") String adminUsername,
-            @Value("${app.admin.password:admin123}") String adminPassword
+            @Value("${app.admin.password:}") String adminPassword
     ) {
         return username -> {
             org.example.backend.model.User user = userRepository.findByEmail(username);
@@ -90,7 +93,7 @@ public class SecurityConfig {
                         .build();
             }
 
-            if (username.equals(adminUsername)) {
+            if (username.equals(adminUsername) && StringUtils.hasText(adminPassword)) {
                 return org.springframework.security.core.userdetails.User.withUsername(adminUsername)
                         .password(passwordEncoder.encode(adminPassword))
                         .roles("ADMIN")

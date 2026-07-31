@@ -9,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
 
@@ -20,9 +21,13 @@ public class DataSeeder {
             UserRepository userRepository,
             PasswordEncoder passwordEncoder,
             @Value("${app.admin.username:admin@example.com}") String adminUsername,
-            @Value("${app.admin.password:admin123}") String adminPassword
+            @Value("${app.admin.password:}") String adminPassword
     ) {
         return args -> {
+            if (!StringUtils.hasText(adminPassword)) {
+                return;
+            }
+
             if (userRepository.findByEmail(adminUsername) != null) {
                 return;
             }

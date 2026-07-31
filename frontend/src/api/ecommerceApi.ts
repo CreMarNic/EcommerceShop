@@ -64,16 +64,28 @@ export type RegisterUserRequest = {
 
 const api = axios.create({
     baseURL: import.meta.env.VITE_API_URL ?? '/api',
+    withCredentials: true,
+    xsrfCookieName: 'XSRF-TOKEN',
+    xsrfHeaderName: 'X-XSRF-TOKEN',
 });
 
 const authStorageKey = 'ecommerceShopAuth';
 const userStorageKey = 'ecommerceShopUser';
+let csrfTokenIsReady = false;
 
-api.interceptors.request.use((config) => {
+api.interceptors.request.use(async (config) => {
     const authHeader = sessionStorage.getItem(authStorageKey);
 
     if (authHeader) {
         config.headers.Authorization = authHeader;
+    }
+
+    const method = config.method?.toUpperCase();
+    const requestNeedsCsrfToken = method === 'POST' || method === 'PUT' || method === 'DELETE';
+
+    if (requestNeedsCsrfToken && !csrfTokenIsReady) {
+        csrfTokenIsReady = true;
+        await api.get('/csrf');
     }
 
     return config;
