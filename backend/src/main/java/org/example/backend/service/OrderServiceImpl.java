@@ -140,6 +140,13 @@ public class OrderServiceImpl implements OrderService {
         if (order.getStatus() != OrderStatus.PENDING && order.getStatus() != OrderStatus.CANCELLED) {
             throw new APIException("Only pending or cancelled orders can be deleted");
         }
+
+        if (order.getStatus() == OrderStatus.PENDING) {
+            restoreStock(order);
+        }
+
+        List<OrderItem> orderItems = orderItemRepository.findByOrderId(order.getId());
+        orderItemRepository.deleteAll(orderItems);
         orderRepository.delete(order);
     }
 

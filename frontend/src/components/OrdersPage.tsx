@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useState } from 'react';
 import {
     addCartItem,
+    deleteOrder,
     getApiErrorMessage,
     getCurrentUserId,
     getOrders,
@@ -42,6 +43,15 @@ export function OrdersPage({ user, onLogout }: OrdersPageProps) {
         }
     }
 
+    async function handleDeleteOrder(orderId: number) {
+        try {
+            await deleteOrder(orderId);
+            setOrders((currentOrders) => currentOrders.filter((order) => order.id !== orderId));
+        } catch (err) {
+            setError(getApiErrorMessage(err, 'Could not delete order'));
+        }
+    }
+
     return (
         <>
             <title>Orders</title>
@@ -72,6 +82,12 @@ export function OrdersPage({ user, onLogout }: OrdersPageProps) {
                                 <div className="order-header-right-section">
                                     <div className="order-header-label">Order ID:</div>
                                     <div>{order.id}</div>
+                                    <button
+                                        className="delete-order-button button-secondary"
+                                        onClick={() => handleDeleteOrder(order.id)}
+                                    >
+                                        Delete order
+                                    </button>
                                 </div>
                             </div>
 
@@ -95,13 +111,6 @@ export function OrdersPage({ user, onLogout }: OrdersPageProps) {
                                             </button>
                                         </div>
 
-                                        <div className="product-actions">
-                                            <a href="/tracking">
-                                                <button className="track-package-button button-secondary">
-                                                    Track package
-                                                </button>
-                                            </a>
-                                        </div>
                                     </Fragment>
                                 ))}
                             </div>

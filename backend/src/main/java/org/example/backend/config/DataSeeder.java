@@ -28,7 +28,12 @@ public class DataSeeder {
                 return;
             }
 
-            if (userRepository.findByEmail(adminUsername) != null) {
+            User existingAdmin = userRepository.findByEmail(adminUsername);
+
+            if (existingAdmin != null) {
+                existingAdmin.setName("Admin");
+                existingAdmin.setPassword(passwordEncoder.encode(adminPassword));
+                userRepository.save(existingAdmin);
                 return;
             }
 

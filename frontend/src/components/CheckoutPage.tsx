@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
     checkoutCart,
     getApiErrorMessage,
@@ -16,6 +17,7 @@ type CheckoutPageProps = {
 };
 
 export function CheckoutPage({ user, onLogout }: CheckoutPageProps) {
+    const navigate = useNavigate();
     const [cart, setCart] = useState<Cart | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
@@ -46,7 +48,7 @@ export function CheckoutPage({ user, onLogout }: CheckoutPageProps) {
         try {
             const userId = getCurrentUserId();
             await checkoutCart(userId);
-            setCart(await getCart(userId));
+            navigate('/orders');
         } catch (err) {
             setError(getApiErrorMessage(err, 'Could not place order'));
         }

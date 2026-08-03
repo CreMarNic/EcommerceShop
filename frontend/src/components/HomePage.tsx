@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import {
     addCartItem,
+    getApiErrorStatus,
     getApiErrorMessage,
     getCart,
     getCurrentUserId,
+    getLoginDebugInfo,
     getProducts,
     type Product,
     type AuthenticatedUser,
@@ -34,10 +36,10 @@ export function HomePage({ user, onLogout }: HomePageProps) {
 
                 setProducts(loadedProducts);
                 setCartQuantity(getCartQuantity(cart.items));
-            } catch (err) {
-                setError(getApiErrorMessage(err, 'Could not load products'));
-            } finally {
-                setLoading(false);
+        } catch (err) {
+            setError(getApiErrorMessage(err, 'Could not load products'));
+        } finally {
+            setLoading(false);
             }
         }
 
@@ -53,7 +55,15 @@ export function HomePage({ user, onLogout }: HomePageProps) {
             setAddedProductId(productId);
             setTimeout(() => setAddedProductId(null), 1500);
         } catch (err) {
-            setError(getApiErrorMessage(err, 'Could not add product to cart'));
+            const loginDebugInfo = getLoginDebugInfo();
+            const status = getApiErrorStatus(err) ?? 'no status';
+
+            setError(
+                `${getApiErrorMessage(err, 'Could not add product to cart')} ` +
+                `(status: ${status}, auth saved: ${loginDebugInfo.hasAuth ? 'yes' : 'no'}, ` +
+                `user saved: ${loginDebugInfo.hasUser ? 'yes' : 'no'}, user id: ${loginDebugInfo.userId ?? 'none'}, ` +
+                `api: ${loginDebugInfo.apiBaseUrl})`
+            );
         }
     }
 

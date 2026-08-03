@@ -71,48 +71,73 @@ const api = axios.create({
 
 const authStorageKey = 'ecommerceShopAuth';
 const userStorageKey = 'ecommerceShopUser';
-let csrfTokenIsReady = false;
+let currentAuthHeader = getStoredValue(authStorageKey);
 
-api.interceptors.request.use(async (config) => {
-    const authHeader = sessionStorage.getItem(authStorageKey);
+function getStoredValue(key: string) {
+    return localStorage.getItem(key) ?? sessionStorage.getItem(key);
+}
+
+function setCurrentAuthHeader(authHeader: string | null) {
+    currentAuthHeader = authHeader;
 
     if (authHeader) {
-        config.headers.Authorization = authHeader;
+        api.defaults.headers.common.Authorization = authHeader;
+    } else {
+        delete api.defaults.headers.common.Authorization;
     }
+}
 
-    const method = config.method?.toUpperCase();
-    const requestNeedsCsrfToken = method === 'POST' || method === 'PUT' || method === 'DELETE';
+function getAuthHeaders() {
+    const authHeader = currentAuthHeader ?? getStoredValue(authStorageKey);
+    return authHeader ? { Authorization: authHeader } : {};
+}
 
-    if (requestNeedsCsrfToken && !csrfTokenIsReady) {
-        csrfTokenIsReady = true;
-        await api.get('/csrf');
+setCurrentAuthHeader(currentAuthHeader);
+
+api.interceptors.request.use(async (config) => {
+    const authHeader = currentAuthHeader ?? getStoredValue(authStorageKey);
+
+    if (authHeader) {
+        if (typeof config.headers.set === 'function') {
+            config.headers.set('Authorization', authHeader);
+        } else {
+            config.headers.Authorization = authHeader;
+        }
     }
 
     return config;
 });
 
 export function hasStoredAuth() {
-    return Boolean(sessionStorage.getItem(authStorageKey));
+    return Boolean(getStoredValue(authStorageKey));
 }
 
 export function getStoredUser() {
-    const storedUser = sessionStorage.getItem(userStorageKey);
+    const storedUser = getStoredValue(userStorageKey);
     return storedUser ? JSON.parse(storedUser) as AuthenticatedUser : null;
 }
 
 export function clearAuth() {
     sessionStorage.removeItem(authStorageKey);
     sessionStorage.removeItem(userStorageKey);
+    localStorage.removeItem(authStorageKey);
+    localStorage.removeItem(userStorageKey);
+    setCurrentAuthHeader(null);
+}
+
+export async function getAuthenticatedUser() {
+    const response = await api.get<AuthenticatedUser>('/auth/me');
+    localStorage.setItem(userStorageKey, JSON.stringify(response.data));
+    return response.data;
 }
 
 export async function authenticate(username: string, password: string) {
     const authHeader = `Basic ${btoa(`${username}:${password}`)}`;
-    sessionStorage.setItem(authStorageKey, authHeader);
+    localStorage.setItem(authStorageKey, authHeader);
+    setCurrentAuthHeader(authHeader);
 
     try {
-        const response = await api.get<AuthenticatedUser>('/auth/me');
-        sessionStorage.setItem(userStorageKey, JSON.stringify(response.data));
-        return response.data;
+        return await getAuthenticatedUser();
     } catch (error) {
         clearAuth();
         throw error;
@@ -146,13 +171,31 @@ export function getApiErrorMessage(error: unknown, fallback: string) {
     return error instanceof Error ? error.message : fallback;
 }
 
+export function getApiErrorStatus(error: unknown) {
+    return axios.isAxiosError(error) ? error.response?.status : undefined;
+}
+
+export function getLoginDebugInfo() {
+    const savedAuth = getStoredValue(authStorageKey);
+    const savedUser = getStoredUser();
+
+    return {
+        hasAuth: Boolean(savedAuth),
+        hasUser: Boolean(savedUser),
+        userId: savedUser?.id,
+        apiBaseUrl: api.defaults.baseURL,
+    };
+}
+
 export async function getProducts() {
     const response = await api.get<Product[]>('/public/products');
     return response.data;
 }
 
 export async function getCart(userId: number) {
-    const response = await api.get<Cart>(`/users/${userId}/cart`);
+    const response = await api.get<Cart>(`/users/${userId}/cart`, {
+        headers: getAuthHeaders(),
+    });
     return response.data;
 }
 
@@ -160,21 +203,35 @@ export async function addCartItem(userId: number, productId: number, quantity: n
     const response = await api.post<Cart>(`/users/${userId}/cart/items`, {
         productId,
         quantity,
+    }, {
+        headers: getAuthHeaders(),
     });
     return response.data;
 }
 
 export async function removeCartItem(userId: number, productId: number) {
-    const response = await api.delete<Cart>(`/users/${userId}/cart/items/${productId}`);
+    const response = await api.delete<Cart>(`/users/${userId}/cart/items/${productId}`, {
+        headers: getAuthHeaders(),
+    });
     return response.data;
 }
 
 export async function checkoutCart(userId: number) {
-    const response = await api.post<Order>(`/users/${userId}/checkout`);
+    const response = await api.post<Order>(`/users/${userId}/checkout`, undefined, {
+        headers: getAuthHeaders(),
+    });
     return response.data;
 }
 
 export async function getOrders(userId: number) {
-    const response = await api.get<Order[]>(`/users/${userId}/orders`);
+    const response = await api.get<Order[]>(`/users/${userId}/orders`, {
+        headers: getAuthHeaders(),
+    });
     return response.data;
+}
+
+export async function deleteOrder(orderId: number) {
+    await api.delete(`/orders/${orderId}`, {
+        headers: getAuthHeaders(),
+    });
 }
