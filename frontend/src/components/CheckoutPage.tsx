@@ -20,6 +20,7 @@ export function CheckoutPage({ user, onLogout }: CheckoutPageProps) {
     const navigate = useNavigate();
     const [cart, setCart] = useState<Cart | null>(null);
     const [loading, setLoading] = useState(true);
+    const [placingOrder, setPlacingOrder] = useState(false);
     const [error, setError] = useState('');
 
     useEffect(() => {
@@ -46,11 +47,16 @@ export function CheckoutPage({ user, onLogout }: CheckoutPageProps) {
 
     async function handleCheckout() {
         try {
+            setError('');
+            setPlacingOrder(true);
             const userId = getCurrentUserId();
             await checkoutCart(userId);
+            setCart(await getCart(userId));
             navigate('/orders');
         } catch (err) {
             setError(getApiErrorMessage(err, 'Could not place order'));
+        } finally {
+            setPlacingOrder(false);
         }
     }
 
@@ -175,9 +181,9 @@ export function CheckoutPage({ user, onLogout }: CheckoutPageProps) {
                         <button
                             className="place-order-button button-primary"
                             onClick={handleCheckout}
-                            disabled={itemCount === 0}
+                            disabled={itemCount === 0 || placingOrder}
                         >
-                            Place your order
+                            {placingOrder ? 'Placing order...' : 'Place your order'}
                         </button>
                     </div>
                 </div>}

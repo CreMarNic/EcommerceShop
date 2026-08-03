@@ -146,28 +146,6 @@
     margin-bottom: 8px;
 }
 
-.orders-page .buy-again-button {
-    font-size: 14px;
-    width: 140px;
-    height: 36px;
-    border-radius: 5px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.orders-page .buy-again-icon {
-    width: 20px;
-    margin-right: 10px;
-}
-
-@media (max-width: 800px) {
-    .orders-page .buy-again-button {
-        margin-bottom: 10px;
-    }
-}
-
 @media (max-width: 450px) {
     .orders-page .product-image-container {
         text-align: center;
@@ -184,11 +162,6 @@
     }
 
     .orders-page .product-quantity {
-        margin-bottom: 15px;
-    }
-
-    .orders-page .buy-again-button {
-        width: 100%;
         margin-bottom: 15px;
     }
 

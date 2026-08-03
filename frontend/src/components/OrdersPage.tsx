@@ -1,6 +1,5 @@
 import { Fragment, useEffect, useState } from 'react';
 import {
-    addCartItem,
     deleteOrder,
     getApiErrorMessage,
     getCurrentUserId,
@@ -34,14 +33,6 @@ export function OrdersPage({ user, onLogout }: OrdersPageProps) {
 
         loadOrders();
     }, []);
-
-    async function handleBuyAgain(productId: number) {
-        try {
-            await addCartItem(getCurrentUserId(), productId, 1);
-        } catch (err) {
-            setError(getApiErrorMessage(err, 'Could not add product to cart'));
-        }
-    }
 
     async function handleDeleteOrder(orderId: number) {
         try {
@@ -102,13 +93,6 @@ export function OrdersPage({ user, onLogout }: OrdersPageProps) {
                                             <div className="product-name">{item.productName}</div>
                                             <div className="product-delivery-date">Status: {order.status}</div>
                                             <div className="product-quantity">Quantity: {item.quantity}</div>
-                                            <button
-                                                className="buy-again-button button-primary"
-                                                onClick={() => handleBuyAgain(item.productId)}
-                                            >
-                                                <img className="buy-again-icon" src="images/icons/buy-again.png"/>
-                                                <span className="buy-again-message">Add to Cart</span>
-                                            </button>
                                         </div>
 
                                     </Fragment>
