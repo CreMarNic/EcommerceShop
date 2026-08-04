@@ -50,6 +50,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 })
 class BackendApplicationTests {
 
+    private int testNumber = 1;
+
     @Autowired
     private UserService userService;
 
@@ -90,27 +92,22 @@ class BackendApplicationTests {
     void createUserHashesPasswordAndDoesNotReturnPassword() {
 
         // given: a request to create a new user.
-
-        String email = "test-user-" + uniqueTestValue() + "@example.com";
+        String email = "test-user-" + nextTestNumber() + "@example.com";
         UserCreateRequest request = new UserCreateRequest("Test User", email, "secret123");
 
         // when: create a user using the real UserService.
-
         UserResponse response = userService.createUser(request);
 
         // Read the saved user directly from the database so we can inspect the stored password.
         User savedUser = userRepository.findById(response.getId()).orElseThrow();
 
         // then: the response has the same email we used.
-
         assertEquals(email, response.getEmail());
 
         // then: the stored password is not the plain text password.
-
         assertNotEquals("secret123", savedUser.getPassword());
 
         // then: the password encoder can still match "secret123" against the hashed password.
-
         assertTrue(passwordEncoder.matches("secret123", savedUser.getPassword()));
     }
 
@@ -118,20 +115,16 @@ class BackendApplicationTests {
     void productCrudWorks() {
 
         // given: a new product request.
-
         Product product = createProduct("Test Product", "12.50", 10);
 
         // when: create a product.
-
         ProductDTO createdProduct = productService.createProduct(product);
 
-        // when: update the product we just created.
-
+        // update the product we just created.
         Product updatedProductRequest = createProduct("Updated Product", "15.00", 8);
         ProductDTO updatedProduct = productService.updateProduct(updatedProductRequest, createdProduct.getId());
 
         // then: the product should have the new values.
-
         assertTrue(updatedProduct.getName().startsWith("Updated Product"));
         assertEquals(new BigDecimal("15.00"), updatedProduct.getPrice());
         assertEquals(8, updatedProduct.getStock());
@@ -141,29 +134,23 @@ class BackendApplicationTests {
     void checkoutCartCreatesOrderReducesStockAndClearsCart() {
 
         //  given: a user, a product with stock, and the product in the user's cart.
-
         UserResponse user = createTestUser("Cart User");
         ProductDTO product = productService.createProduct(createProduct("Checkout Product", "20.00", 5));
-
         cartService.addItem(user.getId(), product.getId(), 2);
 
         // when: the user checks out the cart.
-
         OrderDTO order = orderService.checkoutCart(user.getId());
         CartDTO cart = cartService.getCartByUserId(user.getId());
         ProductDTO savedProduct = productService.getProductById(product.getId());
 
         // then: an order should be created with the expected status and total.
-
         assertEquals(OrderStatus.PENDING, order.getStatus());
         assertEquals(new BigDecimal("40.00"), order.getTotal());
 
-        // then: product started with 5 in stock, user bought 2, so remaining stock should be 3.
-
+        // product started with 5 in stock, user bought 2, so remaining stock should be 3.
         assertEquals(3, savedProduct.getStock());
 
         // then: after checkout, the cart should not still contain old items.
-
         assertTrue(cart.getItems().isEmpty());
     }
 
@@ -171,21 +158,16 @@ class BackendApplicationTests {
     void cancellingOrderRestoresStock() {
 
         // given: a user has checked out an order for 2 products.
-
         UserResponse user = createTestUser("Cancel User");
         ProductDTO product = productService.createProduct(createProduct("Cancel Product", "5.00", 3));
-
         cartService.addItem(user.getId(), product.getId(), 2);
         OrderDTO order = orderService.checkoutCart(user.getId());
 
         // when: the order is cancelled.
-
         orderService.updateOrderStatus(order.getId(), OrderStatus.CANCELLED);
-
         ProductDTO savedProduct = productService.getProductById(product.getId());
 
         // then: product started with 3, checkout used 2, and cancellation adds those 2 back.
-
         assertEquals(3, savedProduct.getStock());
     }
 
@@ -193,25 +175,19 @@ class BackendApplicationTests {
     void deletingPendingOrderDeletesOrderItemsAndRestoresStock() {
 
         // given: a user has checked out an order, so the order has order items in the database.
-
         UserResponse user = createTestUser("Delete Order User");
         ProductDTO product = productService.createProduct(createProduct("Delete Order Product", "6.50", 4));
-
         cartService.addItem(user.getId(), product.getId(), 2);
         OrderDTO order = orderService.checkoutCart(user.getId());
 
         // when: the pending order is deleted.
-
         orderService.deleteOrder(order.getId());
-
         ProductDTO savedProduct = productService.getProductById(product.getId());
 
         // then: the order should be gone.
-
         assertThrows(ResourceNotFoundException.class, () -> orderService.getOrderById(order.getId()));
 
         // then: product started with 4, checkout used 2, and deleting the pending order adds those 2 back.
-
         assertEquals(4, savedProduct.getStock());
     }
 
@@ -219,18 +195,14 @@ class BackendApplicationTests {
     void checkoutFailsWhenStockIsTooLow() {
 
         // given: the product has only 1 item in stock, but the user tries to buy 2.
-
         UserResponse user = createTestUser("Stock User");
         ProductDTO product = productService.createProduct(createProduct("Low Stock Product", "9.99", 1));
-
         cartService.addItem(user.getId(), product.getId(), 2);
 
         // when / then: checkout should fail with APIException.
-
         assertThrows(APIException.class, () -> orderService.checkoutCart(user.getId()));
 
         // then: stock should still be 1 because checkout failed.
-
         assertEquals(1, productRepository.findById(product.getId()).orElseThrow().getStock());
     }
 
@@ -247,12 +219,11 @@ class BackendApplicationTests {
          * - Preventing duplicate emails.
          * - Deleting a user.
          */
-        String email = "user-crud-" + uniqueTestValue() + "@example.com";
+        String email = "user-crud-" + nextTestNumber() + "@example.com";
         UserCreateRequest createRequest = new UserCreateRequest("User Crud", email, "secret123");
 
         // when: create the user, find the user by ID, and list all users.
         UserResponse createdUser = userService.createUser(createRequest);
-
         UserResponse foundUser = userService.getUserById(createdUser.getId());
         List<UserResponse> users = userService.getAllUsers();
 
@@ -261,9 +232,8 @@ class BackendApplicationTests {
         assertTrue(userListContainsId(users, createdUser.getId()));
 
         // when: update the user with a new name and email.
-        String updatedEmail = "updated-user-crud-" + uniqueTestValue() + "@example.com";
+        String updatedEmail = "updated-user-crud-" + nextTestNumber() + "@example.com";
         UserCreateRequest updateRequest = new UserCreateRequest("Updated User", updatedEmail, "newSecret123");
-
         UserResponse updatedUser = userService.updateUser(updateRequest, createdUser.getId());
 
         // then: the user should have the updated values.
@@ -274,7 +244,6 @@ class BackendApplicationTests {
         assertThrows(APIException.class, () -> userService.createUser(
                 new UserCreateRequest("Duplicate User", updatedEmail, "secret123")
         ));
-
         UserResponse secondUser = createTestUser("Second User");
 
         // when / then: updating another user to use an email that already exists should also fail.
@@ -306,7 +275,6 @@ class BackendApplicationTests {
 
         // when: create the product, find it by ID, and list all products.
         ProductDTO product = productService.createProduct(productRequest);
-
         ProductDTO foundProduct = productService.getProductById(product.getId());
         List<ProductDTO> products = productService.getAllProducts();
 
@@ -546,7 +514,7 @@ class BackendApplicationTests {
     }
 
     private UserResponse createTestUser(String name) {
-        // Helper method used by many tests to avoid repeating the same user setup code.
+
         UserCreateRequest request = createUserRequest(name);
         return userService.createUser(request);
     }
@@ -560,11 +528,11 @@ class BackendApplicationTests {
          *
          * Example:
          * Controller User becomes something like:
-         * controller-user-1789123456789@example.com
+         * controller-user-1@example.com
          *
          * This prevents tests from failing when the database already has old test users.
          */
-        String email = name.toLowerCase().replace(" ", "-") + "-" + uniqueTestValue() + "@example.com";
+        String email = name.toLowerCase().replace(" ", "-") + "-" + nextTestNumber() + "@example.com";
         return new UserCreateRequest(name, email, "secret123");
     }
 
@@ -572,7 +540,7 @@ class BackendApplicationTests {
         // Helper method used by many tests to create products with simple test values.
         return new Product(
                 null,
-                name + " " + uniqueTestValue(),
+                name + " " + nextTestNumber(),
                 "Test product description",
                 new BigDecimal(price),
                 stock,
@@ -580,46 +548,42 @@ class BackendApplicationTests {
         );
     }
 
-    private String uniqueTestValue() {
-        /*
-         * This gives each test user/product a different value.
-         *
-         * System.currentTimeMillis() returns the current time as a number.
-         * We use it only to avoid duplicate names/emails in the test database.
-         */
-        return String.valueOf(System.currentTimeMillis());
+    private int nextTestNumber() {
+
+        //  This gives each test user/product a different number.
+        return testNumber++;
     }
 
     private boolean userListContainsId(List<UserResponse> users, Long userId) {
-        // Beginner-friendly loop: look through the list until we find the user ID.
+
+        // look through the list until we find the user ID.
         for (UserResponse user : users) {
             if (user.getId().equals(userId)) {
                 return true;
             }
         }
-
         return false;
     }
 
     private boolean productListContainsId(List<ProductDTO> products, Long productId) {
-        // Beginner-friendly loop: look through the list until we find the product ID.
+
+        // look through the list until we find the product ID.
         for (ProductDTO product : products) {
             if (product.getId().equals(productId)) {
                 return true;
             }
         }
-
         return false;
     }
 
     private boolean orderListContainsId(List<OrderDTO> orders, Long orderId) {
-        // Beginner-friendly loop: look through the list until we find the order ID.
+
+        // look through the list until we find the order ID.
         for (OrderDTO order : orders) {
             if (order.getId().equals(orderId)) {
                 return true;
             }
         }
-
         return false;
     }
 }

@@ -26,7 +26,6 @@ class ProductServiceImplUnitTests {
 
     @Mock
     private ProductRepository productRepository;
-
     private ProductServiceImpl productService;
 
     @BeforeEach
