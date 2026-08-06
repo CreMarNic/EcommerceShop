@@ -25,6 +25,8 @@ export function HomePage({ user, onLogout }: HomePageProps) {
     const [addedProductId, setAddedProductId] = useState<number | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const [searchText, setSearchText] = useState('');
+    const [submittedSearchText, setSubmittedSearchText] = useState('');
 
     useEffect(() => {
         async function loadPageData() {
@@ -67,69 +69,108 @@ export function HomePage({ user, onLogout }: HomePageProps) {
         }
     }
 
+    function handleSearchSubmit() {
+        setSubmittedSearchText(searchText);
+    }
+
+    function handleLogoClick() {
+        setSearchText('');
+        setSubmittedSearchText('');
+    }
+
+    const search = submittedSearchText.trim().toLowerCase();
+    const filteredProducts = products.filter((product) => {
+        if (search.length === 0) {
+            return true;
+        }
+
+        return (
+            product.name.toLowerCase().includes(search) ||
+            (product.description?.toLowerCase().includes(search) ?? false)
+        );
+    });
+
     return (
         <>
             <title>HomePage</title>
 
-            <Header cartQuantity={cartQuantity} user={user} onLogout={onLogout} />
+            <Header
+                cartQuantity={cartQuantity}
+                user={user}
+                onLogout={onLogout}
+                onLogoClick={handleLogoClick}
+                searchText={searchText}
+                onSearchTextChange={setSearchText}
+                onSearchSubmit={handleSearchSubmit}
+            />
 
             <div className="home-page">
                 {loading && <div className="products-message">Loading products...</div>}
                 {error && <div className="products-message">{error}</div>}
 
                 {!loading && !error && (
-                    <div className="products-grid">
-                        {products.map((product) => (
-                            <div key={product.id} className="product-container">
-                                <div className="product-image-container">
-                                    <img className="product-image" src={product.imageUrl}/>
-                                </div>
-
-                                <div className="product-name limit-text-to-2-lines">
-                                    {product.name}
-                                </div>
-
-                                <div className="product-price">
-                                    €{Number(product.price).toFixed(2)}
-                                </div>
-
-                                <div className="product-quantity-container">
-                                    <select
-                                        value={quantities[product.id] ?? 1}
-                                        onChange={(event) =>
-                                            setQuantities({
-                                                ...quantities,
-                                                [product.id]: Number(event.target.value),
-                                            })
-                                        }
-                                    >
-                                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((quantity) => (
-                                            <option key={quantity} value={quantity}>
-                                                {quantity}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
-
-                                <div className="product-spacer"></div>
-
-                                <div
-                                    className="added-to-cart"
-                                    style={{ opacity: addedProductId === product.id ? 1 : 0 }}
-                                >
-                                    <img src="images/icons/checkmark.png"/>
-                                    Added
-                                </div>
-
-                                <button
-                                    className="add-to-cart-button button-primary"
-                                    onClick={() => handleAddToCart(product.id)}
-                                >
-                                    Add to Cart
-                                </button>
+                    <>
+                        {filteredProducts.length === 0 && (
+                            <div className="products-message">
+                                No products found for "{submittedSearchText}".
                             </div>
-                        ))}
-                    </div>
+                        )}
+
+                        {filteredProducts.length > 0 && (
+                            <div className="products-grid">
+                                {filteredProducts.map((product) => (
+                                    <div key={product.id} className="product-container">
+                                        <div className="product-image-container">
+                                            <img className="product-image" src={product.imageUrl}/>
+                                        </div>
+
+                                        <div className="product-name limit-text-to-2-lines">
+                                            {product.name}
+                                        </div>
+
+                                        <div className="product-price">
+                                            €{Number(product.price).toFixed(2)}
+                                        </div>
+
+                                        <div className="product-quantity-container">
+                                            <select
+                                                value={quantities[product.id] ?? 1}
+                                                onChange={(event) =>
+                                                    setQuantities({
+                                                        ...quantities,
+                                                        [product.id]: Number(event.target.value),
+                                                    })
+                                                }
+                                            >
+                                                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((quantity) => (
+                                                    <option key={quantity} value={quantity}>
+                                                        {quantity}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
+
+                                        <div className="product-spacer"></div>
+
+                                        <div
+                                            className="added-to-cart"
+                                            style={{ opacity: addedProductId === product.id ? 1 : 0 }}
+                                        >
+                                            <img src="images/icons/checkmark.png"/>
+                                            Added
+                                        </div>
+
+                                        <button
+                                            className="add-to-cart-button button-primary"
+                                            onClick={() => handleAddToCart(product.id)}
+                                        >
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </>
                 )}
             </div>
         </>

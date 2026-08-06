@@ -1,0 +1,323 @@
+{"kind":"deck","id":"pr/c85hzm","name":"Deck"}
+{"kind":"layout","layoutId":"e90d2d75-9d05-4735-aacd-3d681bb66c7a","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"9c84ad15-bb26-4fbc-98e9-28da4779c06e","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/l54cvo","slide":1,"title":"EcommerceShop","textShapes":12}
+{"kind":"textbox","id":"sh/58z25kb6","slide":1,"text":"EcommerceShop","textPreview":"EcommerceShop","textChars":13,"textLines":1,"bbox":[42,86,840,92]}
+{"kind":"textbox","id":"sh/yhgn29gr","slide":1,"text":"Detailed project presentation for an employer interview","textPreview":"Detailed project presentation for an employer interview","textChars":55,"textLines":1,"bbox":[42,202,760,46]}
+{"kind":"textbox","id":"sh/n29gr2p8","slide":1,"text":"A full-stack ecommerce application built with React, Spring Boot, JPA, H2, Maven, and JUnit.","textPreview":"A full-stack ecommerce application built with React, Spring Boot, JPA, H2, Maven, and JUnit.","textChars":92,"textLines":1,"bbox":[42,322,780,88]}
+{"kind":"shape","id":"sh/gbq1oryt","slide":1,"bbox":[880,96,318,430]}
+{"kind":"textbox","id":"sh/5wjudg7a","slide":1,"text":"What this deck shows","textPreview":"What this deck shows","textChars":20,"textLines":1,"bbox":[912,134,250,34]}
+{"kind":"textbox","id":"sh/y90je9cv","slide":1,"text":"- The customer workflow","textPreview":"- The customer workflow","textChars":23,"textLines":1,"bbox":[912,198,230,40]}
+{"kind":"textbox","id":"sh/nuxc3ylc","slide":1,"text":"- The backend design","textPreview":"- The backend design","textChars":20,"textLines":1,"bbox":[912,241,230,40]}
+{"kind":"textbox","id":"sh/cbulwval","slide":1,"text":"- The frontend structure","textPreview":"- The frontend structure","textChars":24,"textLines":1,"bbox":[912,284,230,40]}
+{"kind":"textbox","id":"sh/5sneloj2","slide":1,"text":"- The business rules","textPreview":"- The business rules","textChars":20,"textLines":1,"bbox":[912,327,230,40]}
+{"kind":"textbox","id":"sh/tcj6tova","slide":1,"text":"- The test strategy","textPreview":"- The test strategy","textChars":19,"textLines":1,"bbox":[912,370,230,40]}
+{"kind":"textbox","id":"sh/0rqd4vmt","slide":1,"text":"- The next improvements","textPreview":"- The next improvements","textChars":23,"textLines":1,"bbox":[912,413,230,40]}
+{"kind":"textbox","id":"sh/b6xkf6dc","slide":1,"text":"React + Spring Boot + H2","textPreview":"React + Spring Boot + H2","textChars":24,"textLines":1,"bbox":[42,620,460,30]}
+{"kind":"textbox","id":"sh/il0rqd4v","slide":1,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[1184,660,54,24]}
+{"kind":"notes","id":"nt/l54cvo","slide":1,"text":""}
+{"kind":"slide","id":"sl/y96wti","slide":2,"title":"The project demonstrates full-stack ownership","textShapes":11}
+{"kind":"textbox","id":"sh/gr2p8nqx","slide":2,"text":"The project demonstrates full-stack ownership","textPreview":"The project demonstrates full-stack ownership","textChars":45,"textLines":1,"bbox":[42,34,960,88]}
+{"kind":"textbox","id":"sh/r65wjudg","slide":2,"text":"The goal is to show that I can build features across the UI, API, service layer, database, and tests.","textPreview":"The goal is to show that I can build features across the UI, API, service layer, database, and tests.","textChars":101,"textLines":1,"bbox":[42,122,900,44]}
+{"kind":"shape","id":"sh/ylc7u54z","slide":2,"bbox":[42,176,1196,2]}
+{"kind":"textbox","id":"sh/5o7qpg3e","slide":2,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[1184,660,54,24]}
+{"kind":"textbox","id":"sh/g3ex0nux","slide":2,"text":"Main employer takeaway","textPreview":"Main employer takeaway","textChars":22,"textLines":1,"bbox":[42,226,360,36]}
+{"kind":"textbox","id":"sh/nih4byhg","slide":2,"text":"I can take a real user workflow, break it into backend and frontend responsibilities, implement the logic, and test the important behavior.","textPreview":"I can take a real user workflow, break it into backend and frontend responsibilities, implement the logic, and test the important behavior.","textChars":139,"textLines":1,"bbox":[42,282,740,106]}
+{"kind":"shape","id":"sh/yxobm58z","slide":2,"bbox":[842,226,356,238]}
+{"kind":"textbox","id":"sh/9s36hcrm","slide":2,"text":"Why it is useful as a portfolio project","textPreview":"Why it is useful as a portfolio project","textChars":39,"textLines":1,"bbox":[872,260,280,58]}
+{"kind":"textbox","id":"sh/g7adsji5","slide":2,"text":"- It is easy to demo.","textPreview":"- It is easy to demo.","textChars":21,"textLines":1,"bbox":[872,342,270,40]}
+{"kind":"textbox","id":"sh/y1kre1w7","slide":2,"text":"- The code has clear layers.","textPreview":"- The code has clear layers.","textChars":28,"textLines":1,"bbox":[872,382,270,40]}
+{"kind":"textbox","id":"sh/rmhk3q5o","slide":2,"text":"- The tests cover meaningful behavior.","textPreview":"- The tests cover meaningful behavior.","textChars":38,"textLines":1,"bbox":[872,422,270,40]}
+{"kind":"textbox","id":"sh/g7adsji5","slide":2,"text":"- The app has realistic business rules.","textPreview":"- The app has realistic business rules.","textChars":39,"textLines":1,"bbox":[872,462,270,40]}
+{"kind":"textbox","id":"sh/9s36hcrm","slide":2,"text":"This is not presented as a production-ready store. It is presented as a practical learning project with a clear path for improvement.","textPreview":"This is not presented as a production-ready store. It is presented as a practical learning project with a clear path for improvement.","textChars":133,"textLines":1,"bbox":[42,512,950,58]}
+{"kind":"notes","id":"nt/y96wti","slide":2,"text":""}
+{"kind":"slide","id":"sl/jbddea","slide":3,"title":"The application covers the core shop workflow","textShapes":18}
+{"kind":"textbox","id":"sh/0bi9s36h","slide":3,"text":"The application covers the core shop workflow","textPreview":"The application covers the core shop workflow","textChars":45,"textLines":1,"bbox":[42,34,960,88]}
+{"kind":"textbox","id":"sh/7qpg3ex0","slide":3,"text":"The flow is intentionally simple so the project can be explained clearly in an interview.","textPreview":"The flow is intentionally simple so the project can be explained clearly in an interview.","textChars":89,"textLines":1,"bbox":[42,122,900,44]}
+{"kind":"shape","id":"sh/i5sneloj","slide":3,"bbox":[42,176,1196,2]}
+{"kind":"textbox","id":"sh/p4r65wju","slide":3,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1184,660,54,24]}
+{"kind":"textbox","id":"sh/wjudg7ad","slide":3,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[42,226,68,44]}
+{"kind":"textbox","id":"sh/7y1kre1w","slide":3,"text":"Register or sign in","textPreview":"Register or sign in","textChars":19,"textLines":1,"bbox":[124,226,768,34]}
+{"kind":"textbox","id":"sh/ed8v6psf","slide":3,"text":"A user creates an account or authenticates with an existing email and password.","textPreview":"A user creates an account or authenticates with an existing email and password.","textChars":79,"textLines":1,"bbox":[124,264,768,42]}
+{"kind":"textbox","id":"sh/p8nqxs72","slide":3,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[42,312,68,44]}
+{"kind":"textbox","id":"sh/0nuxc3yl","slide":3,"text":"Browse the catalog","textPreview":"Browse the catalog","textChars":18,"textLines":1,"bbox":[124,312,768,34]}
+{"kind":"textbox","id":"sh/ih4byhgn","slide":3,"text":"The frontend loads products from public backend endpoints and displays product information.","textPreview":"The frontend loads products from public backend endpoints and displays product information.","textChars":91,"textLines":1,"bbox":[124,350,768,42]}
+{"kind":"textbox","id":"sh/72x4nap4","slide":3,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[42,398,68,44]}
+{"kind":"textbox","id":"sh/0nuxc3yl","slide":3,"text":"Add products to the cart","textPreview":"Add products to the cart","textChars":24,"textLines":1,"bbox":[124,398,768,34]}
+{"kind":"textbox","id":"sh/p8nqxs72","slide":3,"text":"The cart service validates the user, product, and quantity before saving cart items.","textPreview":"The cart service validates the user, product, and quantity before saving cart items.","textChars":84,"textLines":1,"bbox":[124,436,768,42]}
+{"kind":"textbox","id":"sh/itgfmlkj","slide":3,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[42,484,68,44]}
+{"kind":"textbox","id":"sh/7ed8bat4","slide":3,"text":"Checkout","textPreview":"Checkout","textChars":8,"textLines":1,"bbox":[124,484,768,34]}
+{"kind":"textbox","id":"sh/0z61032l","slide":3,"text":"The order service creates an order, stores order items, reduces stock, and clears the cart.","textPreview":"The order service creates an order, stores order items, reduces stock, and clears the cart.","textChars":91,"textLines":1,"bbox":[124,522,768,42]}
+{"kind":"textbox","id":"sh/pkzupwb2","slide":3,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[42,570,68,44]}
+{"kind":"textbox","id":"sh/i5sneloj","slide":3,"text":"Review orders","textPreview":"Review orders","textChars":13,"textLines":1,"bbox":[124,570,768,34]}
+{"kind":"textbox","id":"sh/7qpg3ex0","slide":3,"text":"Users can see past orders and delete orders when the backend rules allow it.","textPreview":"Users can see past orders and delete orders when the backend rules allow it.","textChars":76,"textLines":1,"bbox":[124,608,768,42]}
+{"kind":"notes","id":"nt/jbddea","slide":3,"text":""}
+{"kind":"slide","id":"sl/8t7png","slide":4,"title":"The tech stack is intentionally standard","textShapes":16}
+{"kind":"textbox","id":"sh/udg7adsj","slide":4,"text":"The tech stack is intentionally standard","textPreview":"The tech stack is intentionally standard","textChars":40,"textLines":1,"bbox":[42,34,960,88]}
+{"kind":"textbox","id":"sh/54zidony","slide":4,"text":"The project uses common tools a junior developer is likely to meet in a Java and React team.","textPreview":"The project uses common tools a junior developer is likely to meet in a Java and React team.","textChars":92,"textLines":1,"bbox":[42,122,900,44]}
+{"kind":"shape","id":"sh/cj6tovah","slide":4,"bbox":[42,176,1196,2]}
+{"kind":"textbox","id":"sh/nap4r65w","slide":4,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1184,660,54,24]}
+{"kind":"shape","id":"sh/upwb2hwf","slide":4,"bbox":[42,232,252,126]}
+{"kind":"textbox","id":"sh/5gbq1ory","slide":4,"text":"React","textPreview":"React","textChars":5,"textLines":1,"bbox":[64,254,208,44]}
+{"kind":"textbox","id":"sh/cvixczed","slide":4,"text":"Frontend UI and page state","textPreview":"Frontend UI and page state","textChars":26,"textLines":1,"bbox":[64,308,208,36]}
+{"kind":"shape","id":"sh/jm1cfa9w","slide":4,"bbox":[344,232,252,126]}
+{"kind":"textbox","id":"sh/u18jqh0f","slide":4,"text":"Vite","textPreview":"Vite","textChars":4,"textLines":1,"bbox":[366,254,208,44]}
+{"kind":"textbox","id":"sh/w3m94fu1","slide":4,"text":"Local frontend tooling and build","textPreview":"Local frontend tooling and build","textChars":32,"textLines":1,"bbox":[366,308,208,36]}
+{"kind":"shape","id":"sh/loj2t83i","slide":4,"bbox":[646,232,252,126]}
+{"kind":"textbox","id":"sh/ex0nuxc3","slide":4,"text":"Spring Boot","textPreview":"Spring Boot","textChars":11,"textLines":1,"bbox":[668,254,208,44]}
+{"kind":"textbox","id":"sh/3itgfmlk","slide":4,"text":"REST API, services, validation, security","textPreview":"REST API, services, validation, security","textChars":40,"textLines":1,"bbox":[668,308,208,36]}
+{"kind":"shape","id":"sh/wb2hwfyx","slide":4,"bbox":[948,232,252,126]}
+{"kind":"textbox","id":"sh/lwval87e","slide":4,"text":"JPA + H2","textPreview":"JPA + H2","textChars":8,"textLines":1,"bbox":[970,254,208,44]}
+{"kind":"textbox","id":"sh/e9cvixcz","slide":4,"text":"Entity persistence and local database","textPreview":"Entity persistence and local database","textChars":37,"textLines":1,"bbox":[970,308,208,36]}
+{"kind":"textbox","id":"sh/3q5o7qpg","slide":4,"text":"Build and quality tools","textPreview":"Build and quality tools","textChars":23,"textLines":1,"bbox":[42,444,360,34]}
+{"kind":"textbox","id":"sh/sneloj2t","slide":4,"text":"- Maven runs the backend build and JUnit tests.","textPreview":"- Maven runs the backend build and JUnit tests.","textChars":47,"textLines":1,"bbox":[42,498,1010,40]}
+{"kind":"textbox","id":"sh/l87ed8ba","slide":4,"text":"- JaCoCo is configured for backend coverage reporting.","textPreview":"- JaCoCo is configured for backend coverage reporting.","textChars":54,"textLines":1,"bbox":[42,536,1010,40]}
+{"kind":"textbox","id":"sh/l0rqd4vm","slide":4,"text":"- ESLint is configured for frontend linting.","textPreview":"- ESLint is configured for frontend linting.","textChars":44,"textLines":1,"bbox":[42,574,1010,40]}
+{"kind":"textbox","id":"sh/wfyxobm5","slide":4,"text":"- The frontend API client uses Axios and a configurable base URL.","textPreview":"- The frontend API client uses Axios and a configurable base URL.","textChars":65,"textLines":1,"bbox":[42,612,1010,40]}
+{"kind":"notes","id":"nt/8t7png","slide":4,"text":""}
+{"kind":"slide","id":"sl/po3rkl","slide":5,"title":"The frontend is organized around user-facing pages","textShapes":12}
+{"kind":"textbox","id":"sh/fil0rqd4","slide":5,"text":"The frontend is organized around user-facing pages","textPreview":"The frontend is organized around user-facing pages","textChars":50,"textLines":1,"bbox":[42,34,960,88]}
+{"kind":"textbox","id":"sh/83itgfml","slide":5,"text":"Each page has one clear responsibility and calls the shared API client for backend communication.","textPreview":"Each page has one clear responsibility and calls the shared API client for backend communication.","textChars":97,"textLines":1,"bbox":[42,122,900,44]}
+{"kind":"shape","id":"sh/xobm58z2","slide":5,"bbox":[42,176,1196,2]}
+{"kind":"textbox","id":"sh/m94fu18j","slide":5,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[1184,660,54,24]}
+{"kind":"shape","id":"sh/fu18jqh0","slide":5,"bbox":[42,226,252,270]}
+{"kind":"shape","id":"sh/4fu18jqh","slide":5,"bbox":[344,226,252,270]}
+{"kind":"shape","id":"sh/x0nuxc3y","slide":5,"bbox":[646,226,252,270]}
+{"kind":"shape","id":"sh/mlkjm1cf","slide":5,"bbox":[948,226,252,270]}
+{"kind":"textbox","id":"sh/f6dcbulw","slide":5,"text":"SignInPage","textPreview":"SignInPage","textChars":10,"textLines":1,"bbox":[70,260,200,34]}
+{"kind":"textbox","id":"sh/vixczed8","slide":5,"text":"Handles register and sign-in modes, submits credentials, stores authenticated user data, and shows form errors.","textPreview":"Handles register and sign-in modes, submits credentials, stores authenticated user data, and shows form errors.","textChars":111,"textLines":1,"bbox":[70,320,190,120]}
+{"kind":"textbox","id":"sh/2x4nap4r","slide":5,"text":"HomePage","textPreview":"HomePage","textChars":8,"textLines":1,"bbox":[372,260,200,34]}
+{"kind":"textbox","id":"sh/donyd0z6","slide":5,"text":"Loads products, tracks selected quantities, adds items to the cart, and updates cart quantity feedback.","textPreview":"Loads products, tracks selected quantities, adds items to the cart, and updates cart quantity feedback.","textChars":103,"textLines":1,"bbox":[372,320,190,120]}
+{"kind":"textbox","id":"sh/k3q5o7qp","slide":5,"text":"CheckoutPage","textPreview":"CheckoutPage","textChars":12,"textLines":1,"bbox":[674,260,200,34]}
+{"kind":"textbox","id":"sh/val87ed8","slide":5,"text":"Loads cart contents, calculates display totals, removes items, and submits checkout requests.","textPreview":"Loads cart contents, calculates display totals, removes items, and submits checkout requests.","textChars":93,"textLines":1,"bbox":[674,320,190,120]}
+{"kind":"textbox","id":"sh/6psfil0r","slide":5,"text":"OrdersPage","textPreview":"OrdersPage","textChars":10,"textLines":1,"bbox":[976,260,200,34]}
+{"kind":"textbox","id":"sh/dcbulwva","slide":5,"text":"Loads user orders, displays order details, and lets the user delete eligible orders.","textPreview":"Loads user orders, displays order details, and lets the user delete eligible orders.","textChars":84,"textLines":1,"bbox":[976,320,190,120]}
+{"kind":"textbox","id":"sh/kre1w7mp","slide":5,"text":"The frontend stays beginner-friendly because API functions are separated from page components.","textPreview":"The frontend stays beginner-friendly because API functions are separated from page components.","textChars":94,"textLines":1,"bbox":[42,578,860,38]}
+{"kind":"notes","id":"nt/po3rkl","slide":5,"text":""}
+{"kind":"slide","id":"sl/ue2243","slide":6,"title":"The API client centralizes frontend-backend communication","textShapes":15}
+{"kind":"textbox","id":"sh/vahoza1g","slide":6,"text":"The API client centralizes frontend-backend communication","textPreview":"The API client centralizes frontend-backend communication","textChars":57,"textLines":1,"bbox":[42,34,960,88]}
+{"kind":"textbox","id":"sh/ovahoza1","slide":6,"text":"The React app calls backend endpoints through one shared Axios client.","textPreview":"The React app calls backend endpoints through one shared Axios client.","textChars":70,"textLines":1,"bbox":[42,122,900,44]}
+{"kind":"shape","id":"sh/dg7adsji","slide":6,"bbox":[42,176,1196,2]}
+{"kind":"textbox","id":"sh/6hcrmhk3","slide":6,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[1184,660,54,24]}
+{"kind":"textbox","id":"sh/z25kb6xk","slide":6,"text":"Responsibilities in ecommerceApi.ts","textPreview":"Responsibilities in ecommerceApi.ts","textChars":35,"textLines":1,"bbox":[42,226,420,34]}
+{"kind":"textbox","id":"sh/onyd0z61","slide":6,"text":"- Defines TypeScript types for products, users, carts, orders, and order items.","textPreview":"- Defines TypeScript types for products, users, carts, orders, and order items.","textChars":79,"textLines":1,"bbox":[42,286,620,40]}
+{"kind":"textbox","id":"sh/d8v6psfi","slide":6,"text":"- Creates an Axios instance with a base URL from VITE_API_URL or /api.","textPreview":"- Creates an Axios instance with a base URL from VITE_API_URL or /api.","textChars":70,"textLines":1,"bbox":[42,340,620,40]}
+{"kind":"textbox","id":"sh/6dcbulwv","slide":6,"text":"- Stores and clears Basic Auth credentials in browser storage.","textPreview":"- Stores and clears Basic Auth credentials in browser storage.","textChars":62,"textLines":1,"bbox":[42,394,620,40]}
+{"kind":"textbox","id":"sh/vy90je9c","slide":6,"text":"- Adds the Authorization header through an Axios request interceptor.","textPreview":"- Adds the Authorization header through an Axios request interceptor.","textChars":69,"textLines":1,"bbox":[42,448,620,40]}
+{"kind":"textbox","id":"sh/nuxc3ylc","slide":6,"text":"- Converts backend errors into readable messages for the UI.","textPreview":"- Converts backend errors into readable messages for the UI.","textChars":60,"textLines":1,"bbox":[42,502,620,40]}
+{"kind":"shape","id":"sh/y90je9cv","slide":6,"bbox":[742,226,456,282]}
+{"kind":"textbox","id":"sh/5wjudg7a","slide":6,"text":"Example API calls","textPreview":"Example API calls","textChars":17,"textLines":1,"bbox":[772,260,330,34]}
+{"kind":"textbox","id":"sh/gbq1oryt","slide":6,"text":"- getProducts() -> /public/products","textPreview":"- getProducts() -> /public/products","textChars":35,"textLines":1,"bbox":[772,320,360,40]}
+{"kind":"textbox","id":"sh/n29gr2p8","slide":6,"text":"- getCart(userId) -> /users/{userId}/cart","textPreview":"- getCart(userId) -> /users/{userId}/cart","textChars":41,"textLines":1,"bbox":[772,354,360,40]}
+{"kind":"textbox","id":"sh/yhgn29gr","slide":6,"text":"- addCartItem(...) -> /users/{userId}/cart/items","textPreview":"- addCartItem(...) -> /users/{userId}/cart/items","textChars":48,"textLines":1,"bbox":[772,388,360,40]}
+{"kind":"textbox","id":"sh/58z25kb6","slide":6,"text":"- checkoutCart(userId) -> /users/{userId}/checkout","textPreview":"- checkoutCart(userId) -> /users/{userId}/checkout","textChars":50,"textLines":1,"bbox":[772,422,360,40]}
+{"kind":"textbox","id":"sh/gn29gr2p","slide":6,"text":"- getOrders(userId) -> /users/{userId}/orders","textPreview":"- getOrders(userId) -> /users/{userId}/orders","textChars":45,"textLines":1,"bbox":[772,456,360,40]}
+{"kind":"notes","id":"nt/ue2243","slide":6,"text":""}
+{"kind":"slide","id":"sl/v5bbv5","slide":7,"title":"The backend follows a layered structure","textShapes":18}
+{"kind":"textbox","id":"sh/yd0z6103","slide":7,"text":"The backend follows a layered structure","textPreview":"The backend follows a layered structure","textChars":39,"textLines":1,"bbox":[42,34,960,88]}
+{"kind":"textbox","id":"sh/90je9cvi","slide":7,"text":"Each layer has a different job, which keeps the code easier to explain and test.","textPreview":"Each layer has a different job, which keeps the code easier to explain and test.","textChars":80,"textLines":1,"bbox":[42,122,900,44]}
+{"kind":"shape","id":"sh/gfmlkjm1","slide":7,"bbox":[42,176,1196,2]}
+{"kind":"textbox","id":"sh/rmhk3q5o","slide":7,"text":"07","textPreview":"07","textChars":2,"textLines":1,"bbox":[1184,660,54,24]}
+{"kind":"textbox","id":"sh/y1kre1w7","slide":7,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[42,224,68,44]}
+{"kind":"textbox","id":"sh/9s36hcrm","slide":7,"text":"Controllers","textPreview":"Controllers","textChars":11,"textLines":1,"bbox":[124,224,888,34]}
+{"kind":"textbox","id":"sh/g7adsji5","slide":7,"text":"Receive HTTP requests, validate request bodies, and return ResponseEntity responses.","textPreview":"Receive HTTP requests, validate request bodies, and return ResponseEntity responses.","textChars":84,"textLines":1,"bbox":[124,262,888,42]}
+{"kind":"textbox","id":"sh/nih4byhg","slide":7,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[42,310,68,44]}
+{"kind":"textbox","id":"sh/yxobm58z","slide":7,"text":"Services","textPreview":"Services","textChars":8,"textLines":1,"bbox":[124,310,888,34]}
+{"kind":"textbox","id":"sh/obm58z25","slide":7,"text":"Contain business rules like password hashing, cart validation, checkout, stock updates, and order status changes.","textPreview":"Contain business rules like password hashing, cart validation, checkout, stock updates, and order status changes.","textChars":113,"textLines":1,"bbox":[124,348,888,42]}
+{"kind":"textbox","id":"sh/hwfyxobm","slide":7,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[42,396,68,44]}
+{"kind":"textbox","id":"sh/65wjudg7","slide":7,"text":"Repositories","textPreview":"Repositories","textChars":12,"textLines":1,"bbox":[124,396,888,34]}
+{"kind":"textbox","id":"sh/zqtcj6to","slide":7,"text":"Use Spring Data JPA to read and write entities in the H2 database.","textPreview":"Use Spring Data JPA to read and write entities in the H2 database.","textChars":66,"textLines":1,"bbox":[124,434,888,42]}
+{"kind":"textbox","id":"sh/oza1gvy9","slide":7,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[42,482,68,44]}
+{"kind":"textbox","id":"sh/hk3q5o7q","slide":7,"text":"DTOs","textPreview":"DTOs","textChars":4,"textLines":1,"bbox":[124,482,888,34]}
+{"kind":"textbox","id":"sh/6xkf6dcb","slide":7,"text":"Return clean response shapes to the frontend and avoid exposing fields like passwords.","textPreview":"Return clean response shapes to the frontend and avoid exposing fields like passwords.","textChars":86,"textLines":1,"bbox":[124,520,888,42]}
+{"kind":"textbox","id":"sh/zed8v6ps","slide":7,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[42,568,68,44]}
+{"kind":"textbox","id":"sh/orytsvu9","slide":7,"text":"Exception handler","textPreview":"Exception handler","textChars":17,"textLines":1,"bbox":[124,568,888,34]}
+{"kind":"textbox","id":"sh/hcrmhk3q","slide":7,"text":"Converts validation, not-found, and business-rule errors into consistent JSON responses.","textPreview":"Converts validation, not-found, and business-rule errors into consistent JSON responses.","textChars":88,"textLines":1,"bbox":[124,606,888,42]}
+{"kind":"notes","id":"nt/v5bbv5","slide":7,"text":""}
+{"kind":"slide","id":"sl/1ktfi3","slide":8,"title":"The main entities map to ecommerce concepts","textShapes":13}
+{"kind":"textbox","id":"sh/gn29gr2p","slide":8,"text":"The main entities map to ecommerce concepts","textPreview":"The main entities map to ecommerce concepts","textChars":43,"textLines":1,"bbox":[42,34,960,88]}
+{"kind":"textbox","id":"sh/n29gr2p8","slide":8,"text":"The data model is small enough to understand, but it still models real relationships.","textPreview":"The data model is small enough to understand, but it still models real relationships.","textChars":85,"textLines":1,"bbox":[42,122,900,44]}
+{"kind":"shape","id":"sh/yhgn29gr","slide":8,"bbox":[42,176,1196,2]}
+{"kind":"textbox","id":"sh/5wjudg7a","slide":8,"text":"08","textPreview":"08","textChars":2,"textLines":1,"bbox":[1184,660,54,24]}
+{"kind":"textbox","id":"sh/gbq1oryt","slide":8,"text":"User","textPreview":"User","textChars":4,"textLines":1,"bbox":[42,232,200,34]}
+{"kind":"textbox","id":"sh/nuxc3ylc","slide":8,"text":"Stores account identity and hashed password.","textPreview":"Stores account identity and hashed password.","textChars":44,"textLines":1,"bbox":[42,278,230,60]}
+{"kind":"textbox","id":"sh/y90je9cv","slide":8,"text":"Product","textPreview":"Product","textChars":7,"textLines":1,"bbox":[344,232,200,34]}
+{"kind":"textbox","id":"sh/5sneloj2","slide":8,"text":"Stores catalog data, price, stock, and image URL.","textPreview":"Stores catalog data, price, stock, and image URL.","textChars":49,"textLines":1,"bbox":[344,278,230,60]}
+{"kind":"textbox","id":"sh/cbulwval","slide":8,"text":"Cart + CartItem","textPreview":"Cart + CartItem","textChars":15,"textLines":1,"bbox":[646,232,240,34]}
+{"kind":"textbox","id":"sh/e9cvixcz","slide":8,"text":"A cart belongs to one user. Cart items connect the cart to products and quantities.","textPreview":"A cart belongs to one user. Cart items connect the cart to products and quantities.","textChars":83,"textLines":1,"bbox":[646,278,250,78]}
+{"kind":"textbox","id":"sh/3q5o7qpg","slide":8,"text":"Order + OrderItem","textPreview":"Order + OrderItem","textChars":17,"textLines":1,"bbox":[948,232,250,34]}
+{"kind":"textbox","id":"sh/wb2hwfyx","slide":8,"text":"An order belongs to a user. Order items keep product, quantity, and price at checkout time.","textPreview":"An order belongs to a user. Order items keep product, quantity, and price at checkout time.","textChars":91,"textLines":1,"bbox":[948,278,250,78]}
+{"kind":"shape","id":"sh/lwval87e","slide":8,"bbox":[42,472,1156,82]}
+{"kind":"textbox","id":"sh/ex0nuxc3","slide":8,"text":"Beginner explanation","textPreview":"Beginner explanation","textChars":20,"textLines":1,"bbox":[72,496,240,30]}
+{"kind":"textbox","id":"sh/3itgfmlk","slide":8,"text":"The database is not just a single table. It stores separate concepts and links them together so the app can answer questions like: what is in this user's cart, and what products were bought in this order?","textPreview":"The database is not just a single table. It stores separate concepts and links them together so the app can answer questions like: what i...","textChars":204,"textLines":1,"bbox":[340,492,780,40]}
+{"kind":"notes","id":"nt/1ktfi3","slide":8,"text":""}
+{"kind":"slide","id":"sl/lg6fmm","slide":9,"title":"Cart behavior protects basic data quality","textShapes":11}
+{"kind":"textbox","id":"sh/z61032ls","slide":9,"text":"Cart behavior protects basic data quality","textPreview":"Cart behavior protects basic data quality","textChars":41,"textLines":1,"bbox":[42,34,960,88]}
+{"kind":"textbox","id":"sh/orytsvu9","slide":9,"text":"The cart service is where simple but important business validation happens.","textPreview":"The cart service is where simple but important business validation happens.","textChars":75,"textLines":1,"bbox":[42,122,900,44]}
+{"kind":"shape","id":"sh/hcrmhk3q","slide":9,"bbox":[42,176,1196,2]}
+{"kind":"textbox","id":"sh/a9w3m94f","slide":9,"text":"09","textPreview":"09","textChars":2,"textLines":1,"bbox":[1184,660,54,24]}
+{"kind":"textbox","id":"sh/zupwb2hw","slide":9,"text":"What the cart service does","textPreview":"What the cart service does","textChars":26,"textLines":1,"bbox":[42,226,420,34]}
+{"kind":"textbox","id":"sh/sfil0rqd","slide":9,"text":"- Creates a cart automatically if the user does not have one yet.","textPreview":"- Creates a cart automatically if the user does not have one yet.","textChars":65,"textLines":1,"bbox":[42,288,650,40]}
+{"kind":"textbox","id":"sh/h0fepkzu","slide":9,"text":"- Checks that quantity is not null and is at least 1.","textPreview":"- Checks that quantity is not null and is at least 1.","textChars":53,"textLines":1,"bbox":[42,340,650,40]}
+{"kind":"textbox","id":"sh/65wjudg7","slide":9,"text":"- Checks that the user and product exist before saving an item.","textPreview":"- Checks that the user and product exist before saving an item.","textChars":63,"textLines":1,"bbox":[42,392,650,40]}
+{"kind":"textbox","id":"sh/zqtcj6to","slide":9,"text":"- Adds to an existing cart item when the product is already in the cart.","textPreview":"- Adds to an existing cart item when the product is already in the cart.","textChars":72,"textLines":1,"bbox":[42,444,650,40]}
+{"kind":"textbox","id":"sh/zupwb2hw","slide":9,"text":"- Calculates cart totals from item price multiplied by item quantity.","textPreview":"- Calculates cart totals from item price multiplied by item quantity.","textChars":69,"textLines":1,"bbox":[42,496,650,40]}
+{"kind":"shape","id":"sh/a9w3m94f","slide":9,"bbox":[762,242,418,250]}
+{"kind":"textbox","id":"sh/h0fepkzu","slide":9,"text":"Why this matters","textPreview":"Why this matters","textChars":16,"textLines":1,"bbox":[792,278,300,34]}
+{"kind":"textbox","id":"sh/sfil0rqd","slide":9,"text":"This keeps invalid cart data out of the database and gives the frontend predictable error messages when something goes wrong.","textPreview":"This keeps invalid cart data out of the database and gives the frontend predictable error messages when something goes wrong.","textChars":125,"textLines":1,"bbox":[792,340,330,96]}
+{"kind":"notes","id":"nt/lg6fmm","slide":9,"text":""}
+{"kind":"slide","id":"sl/hm65x2","slide":10,"title":"Checkout turns a cart into an order","textShapes":18}
+{"kind":"textbox","id":"sh/upwb2hwf","slide":10,"text":"Checkout turns a cart into an order","textPreview":"Checkout turns a cart into an order","textChars":35,"textLines":1,"bbox":[42,34,960,88]}
+{"kind":"textbox","id":"sh/5gbq1ory","slide":10,"text":"This is the most important backend workflow because several things must happen together.","textPreview":"This is the most important backend workflow because several things must happen together.","textChars":88,"textLines":1,"bbox":[42,122,900,44]}
+{"kind":"shape","id":"sh/cvixczed","slide":10,"bbox":[42,176,1196,2]}
+{"kind":"textbox","id":"sh/nyd0z610","slide":10,"text":"10","textPreview":"10","textChars":2,"textLines":1,"bbox":[1184,660,54,24]}
+{"kind":"textbox","id":"sh/udg7adsj","slide":10,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[42,224,68,44]}
+{"kind":"textbox","id":"sh/54zidony","slide":10,"text":"Find the cart","textPreview":"Find the cart","textChars":13,"textLines":1,"bbox":[124,224,908,34]}
+{"kind":"textbox","id":"sh/cj6tovah","slide":10,"text":"The service looks up the user's cart and rejects checkout if no cart exists.","textPreview":"The service looks up the user's cart and rejects checkout if no cart exists.","textChars":76,"textLines":1,"bbox":[124,262,908,42]}
+{"kind":"textbox","id":"sh/judg7ads","slide":10,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[42,310,68,44]}
+{"kind":"textbox","id":"sh/u9knih4b","slide":10,"text":"Reject empty carts","textPreview":"Reject empty carts","textChars":18,"textLines":1,"bbox":[124,310,908,34]}
+{"kind":"textbox","id":"sh/47y1kre1","slide":10,"text":"Checkout is blocked when the cart has no items.","textPreview":"Checkout is blocked when the cart has no items.","textChars":47,"textLines":1,"bbox":[124,348,908,42]}
+{"kind":"textbox","id":"sh/tsvu9kni","slide":10,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[42,396,68,44]}
+{"kind":"textbox","id":"sh/m1cfa9w3","slide":10,"text":"Create a pending order","textPreview":"Create a pending order","textChars":22,"textLines":1,"bbox":[124,396,908,34]}
+{"kind":"textbox","id":"sh/bm58z25k","slide":10,"text":"The order starts with PENDING status and belongs to the user.","textPreview":"The order starts with PENDING status and belongs to the user.","textChars":61,"textLines":1,"bbox":[124,434,908,42]}
+{"kind":"textbox","id":"sh/4vmtwra5","slide":10,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[42,482,68,44]}
+{"kind":"textbox","id":"sh/tgfmlkjm","slide":10,"text":"Move items into the order","textPreview":"Move items into the order","textChars":25,"textLines":1,"bbox":[124,482,908,34]}
+{"kind":"textbox","id":"sh/mp0bi9s3","slide":10,"text":"Each cart item becomes an order item with product, quantity, and price.","textPreview":"Each cart item becomes an order item with product, quantity, and price.","textChars":71,"textLines":1,"bbox":[124,520,908,42]}
+{"kind":"textbox","id":"sh/bat47y1k","slide":10,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[42,568,68,44]}
+{"kind":"textbox","id":"sh/4nap4r65","slide":10,"text":"Update stock and clear cart","textPreview":"Update stock and clear cart","textChars":27,"textLines":1,"bbox":[124,568,908,34]}
+{"kind":"textbox","id":"sh/t83itgfm","slide":10,"text":"Stock is reduced for purchased products, and cart items are deleted after checkout.","textPreview":"Stock is reduced for purchased products, and cart items are deleted after checkout.","textChars":83,"textLines":1,"bbox":[124,606,908,42]}
+{"kind":"notes","id":"nt/hm65x2","slide":10,"text":""}
+{"kind":"slide","id":"sl/c03810","slide":11,"title":"Order status rules make the workflow safer","textShapes":10}
+{"kind":"textbox","id":"sh/hoza1gvy","slide":11,"text":"Order status rules make the workflow safer","textPreview":"Order status rules make the workflow safer","textChars":42,"textLines":1,"bbox":[42,34,960,88]}
+{"kind":"textbox","id":"sh/a1gvy90j","slide":11,"text":"Orders are not just saved; their status controls what can happen later.","textPreview":"Orders are not just saved; their status controls what can happen later.","textChars":71,"textLines":1,"bbox":[42,122,900,44]}
+{"kind":"shape","id":"sh/zidonyd0","slide":11,"bbox":[42,176,1196,2]}
+{"kind":"textbox","id":"sh/svu9knih","slide":11,"text":"11","textPreview":"11","textChars":2,"textLines":1,"bbox":[1184,660,54,24]}
+{"kind":"shape","id":"sh/hgn29gr2","slide":11,"bbox":[42,224,350,288]}
+{"kind":"shape","id":"sh/ap4r65wj","slide":11,"bbox":[466,224,350,288]}
+{"kind":"shape","id":"sh/za1gvy90","slide":11,"bbox":[890,224,350,288]}
+{"kind":"textbox","id":"sh/sji5snel","slide":11,"text":"Cancellation","textPreview":"Cancellation","textChars":12,"textLines":1,"bbox":[74,264,250,34]}
+{"kind":"textbox","id":"sh/h4byhgn2","slide":11,"text":"When an order is cancelled, the service restores product stock from the order items.","textPreview":"When an order is cancelled, the service restores product stock from the order items.","textChars":84,"textLines":1,"bbox":[74,324,260,86]}
+{"kind":"textbox","id":"sh/p4r65wju","slide":11,"text":"Deletion","textPreview":"Deletion","textChars":8,"textLines":1,"bbox":[498,264,250,34]}
+{"kind":"textbox","id":"sh/wjudg7ad","slide":11,"text":"Only pending or cancelled orders can be deleted. Deleting a pending order also restores stock.","textPreview":"Only pending or cancelled orders can be deleted. Deleting a pending order also restores stock.","textChars":94,"textLines":1,"bbox":[498,324,260,104]}
+{"kind":"textbox","id":"sh/7y1kre1w","slide":11,"text":"Final states","textPreview":"Final states","textChars":12,"textLines":1,"bbox":[922,264,250,34]}
+{"kind":"textbox","id":"sh/ed8v6psf","slide":11,"text":"Delivered and cancelled orders cannot be changed back to other statuses.","textPreview":"Delivered and cancelled orders cannot be changed back to other statuses.","textChars":72,"textLines":1,"bbox":[922,324,260,86]}
+{"kind":"textbox","id":"sh/pwb2hwfy","slide":11,"text":"This is a good interview topic because it shows you thought about state transitions and data consistency.","textPreview":"This is a good interview topic because it shows you thought about state transitions and data consistency.","textChars":105,"textLines":1,"bbox":[42,572,1000,38]}
+{"kind":"notes","id":"nt/c03810","slide":11,"text":""}
+{"kind":"slide","id":"sl/teihb7","slide":12,"title":"Security is simple but clear","textShapes":11}
+{"kind":"textbox","id":"sh/dcbulwva","slide":12,"text":"Security is simple but clear","textPreview":"Security is simple but clear","textChars":28,"textLines":1,"bbox":[42,34,960,88]}
+{"kind":"textbox","id":"sh/6psfil0r","slide":12,"text":"The project uses Spring Security with public, authenticated, and admin-only routes.","textPreview":"The project uses Spring Security with public, authenticated, and admin-only routes.","textChars":83,"textLines":1,"bbox":[42,122,900,44]}
+{"kind":"shape","id":"sh/val87ed8","slide":12,"bbox":[42,176,1196,2]}
+{"kind":"textbox","id":"sh/k3q5o7qp","slide":12,"text":"12","textPreview":"12","textChars":2,"textLines":1,"bbox":[1184,660,54,24]}
+{"kind":"textbox","id":"sh/donyd0z6","slide":12,"text":"- Public routes allow product browsing and user registration.","textPreview":"- Public routes allow product browsing and user registration.","textChars":61,"textLines":1,"bbox":[42,230,830,40]}
+{"kind":"textbox","id":"sh/2x4nap4r","slide":12,"text":"- Authenticated routes protect cart, checkout, order history, and /auth/me.","textPreview":"- Authenticated routes protect cart, checkout, order history, and /auth/me.","textChars":75,"textLines":1,"bbox":[42,282,830,40]}
+{"kind":"textbox","id":"sh/vixczed8","slide":12,"text":"- Admin routes protect user management, product management, and order status changes.","textPreview":"- Admin routes protect user management, product management, and order status changes.","textChars":85,"textLines":1,"bbox":[42,334,830,40]}
+{"kind":"textbox","id":"sh/kf6dcbul","slide":12,"text":"- Passwords are encoded with BCrypt before they are saved.","textPreview":"- Passwords are encoded with BCrypt before they are saved.","textChars":58,"textLines":1,"bbox":[42,386,830,40]}
+{"kind":"textbox","id":"sh/d0z61032","slide":12,"text":"- CORS is configured for the frontend URL so the React app can call the backend.","textPreview":"- CORS is configured for the frontend URL so the React app can call the backend.","textChars":80,"textLines":1,"bbox":[42,438,830,40]}
+{"kind":"textbox","id":"sh/dsji5sne","slide":12,"text":"- Unauthorized requests return a JSON response instead of an HTML login page.","textPreview":"- Unauthorized requests return a JSON response instead of an HTML login page.","textChars":77,"textLines":1,"bbox":[42,490,830,40]}
+{"kind":"shape","id":"sh/o7qpg3ex","slide":12,"bbox":[930,244,268,238]}
+{"kind":"textbox","id":"sh/vmtwra5g","slide":12,"text":"Beginner wording","textPreview":"Beginner wording","textChars":16,"textLines":1,"bbox":[958,280,210,34]}
+{"kind":"textbox","id":"sh/61032lsz","slide":12,"text":"The app does not store the user's real password. It stores a hash, then compares future login attempts against that hash.","textPreview":"The app does not store the user's real password. It stores a hash, then compares future login attempts against that hash.","textChars":121,"textLines":1,"bbox":[958,338,190,104]}
+{"kind":"notes","id":"nt/teihb7","slide":12,"text":""}
+{"kind":"slide","id":"sl/6p53l6","slide":13,"title":"Database configuration differs between app runs and tests","textShapes":12}
+{"kind":"textbox","id":"sh/qd4vmtwr","slide":13,"text":"Database configuration differs between app runs and tests","textPreview":"Database configuration differs between app runs and tests","textChars":57,"textLines":1,"bbox":[42,34,960,88]}
+{"kind":"textbox","id":"sh/x4nap4r6","slide":13,"text":"This is useful to explain because it shows how tests stay isolated from local data.","textPreview":"This is useful to explain because it shows how tests stay isolated from local data.","textChars":83,"textLines":1,"bbox":[42,122,900,44]}
+{"kind":"shape","id":"sh/8jqh0fep","slide":13,"bbox":[42,176,1196,2]}
+{"kind":"textbox","id":"sh/fa9w3m94","slide":13,"text":"13","textPreview":"13","textChars":2,"textLines":1,"bbox":[1184,660,54,24]}
+{"kind":"textbox","id":"sh/qpg3ex0n","slide":13,"text":"Normal app run","textPreview":"Normal app run","textChars":14,"textLines":1,"bbox":[42,236,300,34]}
+{"kind":"textbox","id":"sh/xczed8v6","slide":13,"text":"- application.properties uses jdbc:h2:file:./data/ecommerce.","textPreview":"- application.properties uses jdbc:h2:file:./data/ecommerce.","textChars":60,"textLines":1,"bbox":[42,298,450,40]}
+{"kind":"textbox","id":"sh/8v6psfil","slide":13,"text":"- The file database keeps data between backend restarts.","textPreview":"- The file database keeps data between backend restarts.","textChars":56,"textLines":1,"bbox":[42,353,450,40]}
+{"kind":"textbox","id":"sh/je9cvixc","slide":13,"text":"- spring.jpa.hibernate.ddl-auto=update keeps the schema in sync.","textPreview":"- spring.jpa.hibernate.ddl-auto=update keeps the schema in sync.","textChars":64,"textLines":1,"bbox":[42,408,450,40]}
+{"kind":"textbox","id":"sh/qtcj6tov","slide":13,"text":"Test run","textPreview":"Test run","textChars":8,"textLines":1,"bbox":[650,236,300,34]}
+{"kind":"textbox","id":"sh/svu9knih","slide":13,"text":"- BackendApplicationTests overrides the datasource to jdbc:h2:mem:ecommerce-test.","textPreview":"- BackendApplicationTests overrides the datasource to jdbc:h2:mem:ecommerce-test.","textChars":81,"textLines":1,"bbox":[650,298,500,40]}
+{"kind":"textbox","id":"sh/hgn29gr2","slide":13,"text":"- The test database exists only while the test JVM is running.","textPreview":"- The test database exists only while the test JVM is running.","textChars":62,"textLines":1,"bbox":[650,353,500,40]}
+{"kind":"textbox","id":"sh/ap4r65wj","slide":13,"text":"- create-drop creates tables for the test and removes them afterward.","textPreview":"- create-drop creates tables for the test and removes them afterward.","textChars":69,"textLines":1,"bbox":[650,408,500,40]}
+{"kind":"textbox","id":"sh/za1gvy90","slide":13,"text":"Result: tests can create users, carts, orders, and products without modifying the normal local database.","textPreview":"Result: tests can create users, carts, orders, and products without modifying the normal local database.","textChars":104,"textLines":1,"bbox":[42,584,990,38]}
+{"kind":"notes","id":"nt/6p53l6","slide":13,"text":""}
+{"kind":"slide","id":"sl/59larw","slide":14,"title":"Testing covers both small units and full workflows","textShapes":18}
+{"kind":"textbox","id":"sh/47y1kre1","slide":14,"text":"Testing covers both small units and full workflows","textPreview":"Testing covers both small units and full workflows","textChars":50,"textLines":1,"bbox":[42,34,960,88]}
+{"kind":"textbox","id":"sh/bm58z25k","slide":14,"text":"The backend test suite has 17 passing tests across service units and Spring Boot integration tests.","textPreview":"The backend test suite has 17 passing tests across service units and Spring Boot integration tests.","textChars":99,"textLines":1,"bbox":[42,122,900,44]}
+{"kind":"shape","id":"sh/m1cfa9w3","slide":14,"bbox":[42,176,1196,2]}
+{"kind":"textbox","id":"sh/tgfmlkjm","slide":14,"text":"14","textPreview":"14","textChars":2,"textLines":1,"bbox":[1184,660,54,24]}
+{"kind":"shape","id":"sh/4vmtwra5","slide":14,"bbox":[42,230,252,126]}
+{"kind":"textbox","id":"sh/bat47y1k","slide":14,"text":"17","textPreview":"17","textChars":2,"textLines":1,"bbox":[64,252,208,44]}
+{"kind":"textbox","id":"sh/mp0bi9s3","slide":14,"text":"backend tests pass","textPreview":"backend tests pass","textChars":18,"textLines":1,"bbox":[64,306,208,36]}
+{"kind":"shape","id":"sh/t83itgfm","slide":14,"bbox":[344,230,252,126]}
+{"kind":"textbox","id":"sh/4nap4r65","slide":14,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[366,252,208,44]}
+{"kind":"textbox","id":"sh/u9knih4b","slide":14,"text":"test classes","textPreview":"test classes","textChars":12,"textLines":1,"bbox":[366,306,208,36]}
+{"kind":"shape","id":"sh/judg7ads","slide":14,"bbox":[646,230,252,126]}
+{"kind":"textbox","id":"sh/cfa9w3m9","slide":14,"text":"12","textPreview":"12","textChars":2,"textLines":1,"bbox":[668,252,208,44]}
+{"kind":"textbox","id":"sh/1032lszq","slide":14,"text":"integration tests in BackendApplicationTests","textPreview":"integration tests in BackendApplicationTests","textChars":44,"textLines":1,"bbox":[668,306,208,36]}
+{"kind":"shape","id":"sh/u18jqh0f","slide":14,"bbox":[948,230,252,126]}
+{"kind":"textbox","id":"sh/jm1cfa9w","slide":14,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[970,252,208,44]}
+{"kind":"textbox","id":"sh/c7u54zid","slide":14,"text":"Mockito unit test classes","textPreview":"Mockito unit test classes","textChars":25,"textLines":1,"bbox":[970,306,208,36]}
+{"kind":"textbox","id":"sh/1orytsvu","slide":14,"text":"Important tested behavior","textPreview":"Important tested behavior","textChars":25,"textLines":1,"bbox":[42,434,360,34]}
+{"kind":"textbox","id":"sh/upwb2hwf","slide":14,"text":"- User creation hashes passwords and does not expose plain text passwords.","textPreview":"- User creation hashes passwords and does not expose plain text passwords.","textChars":74,"textLines":1,"bbox":[42,492,1040,26]}
+{"kind":"textbox","id":"sh/nap4r65w","slide":14,"text":"- Product create, update, read, and delete behavior works.","textPreview":"- Product create, update, read, and delete behavior works.","textChars":58,"textLines":1,"bbox":[42,523,1040,26]}
+{"kind":"textbox","id":"sh/f6dcbulw","slide":14,"text":"- Cart add, update, remove, clear, and validation rules work.","textPreview":"- Cart add, update, remove, clear, and validation rules work.","textChars":61,"textLines":1,"bbox":[42,554,1040,26]}
+{"kind":"textbox","id":"sh/mlkjm1cf","slide":14,"text":"- Checkout creates orders, reduces stock, and clears the cart.","textPreview":"- Checkout creates orders, reduces stock, and clears the cart.","textChars":62,"textLines":1,"bbox":[42,585,1040,26]}
+{"kind":"textbox","id":"sh/xc3ylc7u","slide":14,"text":"- Cancelling or deleting eligible orders restores stock.","textPreview":"- Cancelling or deleting eligible orders restores stock.","textChars":56,"textLines":1,"bbox":[42,616,1040,26]}
+{"kind":"textbox","id":"sh/4r65wjud","slide":14,"text":"- Controllers return expected HTTP statuses.","textPreview":"- Controllers return expected HTTP statuses.","textChars":44,"textLines":1,"bbox":[42,647,1040,26]}
+{"kind":"notes","id":"nt/59larw","slide":14,"text":""}
+{"kind":"slide","id":"sl/aac6k3","slide":15,"title":"The project also shows error handling and validation","textShapes":13}
+{"kind":"textbox","id":"sh/xs72x4na","slide":15,"text":"The project also shows error handling and validation","textPreview":"The project also shows error handling and validation","textChars":52,"textLines":1,"bbox":[42,34,960,88]}
+{"kind":"textbox","id":"sh/q1orytsv","slide":15,"text":"A good API should fail in a predictable way, not just work in the happy path.","textPreview":"A good API should fail in a predictable way, not just work in the happy path.","textChars":77,"textLines":1,"bbox":[42,122,900,44]}
+{"kind":"shape","id":"sh/fmlkjm1c","slide":15,"bbox":[42,176,1196,2]}
+{"kind":"textbox","id":"sh/8z25kb6x","slide":15,"text":"15","textPreview":"15","textChars":2,"textLines":1,"bbox":[1184,660,54,24]}
+{"kind":"textbox","id":"sh/1gvy90je","slide":15,"text":"Backend error handling","textPreview":"Backend error handling","textChars":22,"textLines":1,"bbox":[42,226,360,34]}
+{"kind":"textbox","id":"sh/qtcj6tov","slide":15,"text":"- Validation errors return HTTP 400 with field-level messages.","textPreview":"- Validation errors return HTTP 400 with field-level messages.","textChars":62,"textLines":1,"bbox":[42,286,620,40]}
+{"kind":"textbox","id":"sh/je9cvixc","slide":15,"text":"- Missing records return HTTP 404 through ResourceNotFoundException.","textPreview":"- Missing records return HTTP 404 through ResourceNotFoundException.","textChars":68,"textLines":1,"bbox":[42,342,620,40]}
+{"kind":"textbox","id":"sh/8v6psfil","slide":15,"text":"- Business rule failures return HTTP 400 through APIException.","textPreview":"- Business rule failures return HTTP 400 through APIException.","textChars":62,"textLines":1,"bbox":[42,398,620,40]}
+{"kind":"textbox","id":"sh/xczed8v6","slide":15,"text":"- Invalid URL parameter types return a clear bad-request message.","textPreview":"- Invalid URL parameter types return a clear bad-request message.","textChars":65,"textLines":1,"bbox":[42,454,620,40]}
+{"kind":"textbox","id":"sh/donyd0z6","slide":15,"text":"Frontend error handling","textPreview":"Frontend error handling","textChars":23,"textLines":1,"bbox":[730,226,360,34]}
+{"kind":"textbox","id":"sh/k3q5o7qp","slide":15,"text":"- The API client extracts backend response messages.","textPreview":"- The API client extracts backend response messages.","textChars":52,"textLines":1,"bbox":[730,286,420,40]}
+{"kind":"textbox","id":"sh/vixczed8","slide":15,"text":"- Pages show readable fallback messages if the backend does not return one.","textPreview":"- Pages show readable fallback messages if the backend does not return one.","textChars":75,"textLines":1,"bbox":[730,342,420,40]}
+{"kind":"textbox","id":"sh/2x4nap4r","slide":15,"text":"- Failed authentication clears stored credentials.","textPreview":"- Failed authentication clears stored credentials.","textChars":50,"textLines":1,"bbox":[730,398,420,40]}
+{"kind":"textbox","id":"sh/dcbulwva","slide":15,"text":"- Debug info helps understand login or API-base-url problems.","textPreview":"- Debug info helps understand login or API-base-url problems.","textChars":61,"textLines":1,"bbox":[730,454,420,40]}
+{"kind":"notes","id":"nt/aac6k3","slide":15,"text":""}
+{"kind":"slide","id":"sl/8e458n","slide":16,"title":"What I would improve next","textShapes":14}
+{"kind":"textbox","id":"sh/g7adsji5","slide":16,"text":"What I would improve next","textPreview":"What I would improve next","textChars":25,"textLines":1,"bbox":[42,34,960,88]}
+{"kind":"textbox","id":"sh/rmhk3q5o","slide":16,"text":"This slide helps position the project honestly and shows that I can think beyond the first version.","textPreview":"This slide helps position the project honestly and shows that I can think beyond the first version.","textChars":99,"textLines":1,"bbox":[42,122,900,44]}
+{"kind":"shape","id":"sh/y1kre1w7","slide":16,"bbox":[42,176,1196,2]}
+{"kind":"textbox","id":"sh/90je9cvi","slide":16,"text":"16","textPreview":"16","textChars":2,"textLines":1,"bbox":[1184,660,54,24]}
+{"kind":"textbox","id":"sh/gfmlkjm1","slide":16,"text":"Frontend","textPreview":"Frontend","textChars":8,"textLines":1,"bbox":[42,226,260,34]}
+{"kind":"textbox","id":"sh/rytsvu9k","slide":16,"text":"- Add component tests for pages and forms.","textPreview":"- Add component tests for pages and forms.","textChars":42,"textLines":1,"bbox":[42,284,430,40]}
+{"kind":"textbox","id":"sh/yd0z6103","slide":16,"text":"- Add end-to-end tests for login, add-to-cart, and checkout.","textPreview":"- Add end-to-end tests for login, add-to-cart, and checkout.","textChars":60,"textLines":1,"bbox":[42,338,430,40]}
+{"kind":"textbox","id":"sh/9cvixcze","slide":16,"text":"- Improve loading, empty, and error states.","textPreview":"- Improve loading, empty, and error states.","textChars":43,"textLines":1,"bbox":[42,392,430,40]}
+{"kind":"textbox","id":"sh/gr2p8nqx","slide":16,"text":"Backend","textPreview":"Backend","textChars":7,"textLines":1,"bbox":[650,226,260,34]}
+{"kind":"textbox","id":"sh/ahoza1gv","slide":16,"text":"- Use JWT or session authentication instead of Basic Auth.","textPreview":"- Use JWT or session authentication instead of Basic Auth.","textChars":58,"textLines":1,"bbox":[650,284,470,40]}
+{"kind":"textbox","id":"sh/32lszqtc","slide":16,"text":"- Add pagination and search/filter endpoints.","textPreview":"- Add pagination and search/filter endpoints.","textChars":45,"textLines":1,"bbox":[650,338,470,40]}
+{"kind":"textbox","id":"sh/sneloj2t","slide":16,"text":"- Add transactional boundaries around checkout.","textPreview":"- Add transactional boundaries around checkout.","textChars":47,"textLines":1,"bbox":[650,392,470,40]}
+{"kind":"textbox","id":"sh/l87ed8ba","slide":16,"text":"- Add admin UI support for products and orders.","textPreview":"- Add admin UI support for products and orders.","textChars":47,"textLines":1,"bbox":[650,446,470,40]}
+{"kind":"textbox","id":"sh/at47y1kr","slide":16,"text":"Interview phrasing","textPreview":"Interview phrasing","textChars":18,"textLines":1,"bbox":[42,588,260,32]}
+{"kind":"textbox","id":"sh/3ex0nuxc","slide":16,"text":"The current version proves I understand the main flow. The next version would focus on production concerns and better user/admin workflows.","textPreview":"The current version proves I understand the main flow. The next version would focus on production concerns and better user/admin workflows.","textChars":139,"textLines":1,"bbox":[320,586,800,38]}
+{"kind":"notes","id":"nt/8e458n","slide":16,"text":""}
+{"kind":"slide","id":"sl/yp6ifh","slide":17,"title":"How I would present it live","textShapes":18}
+{"kind":"textbox","id":"sh/4nap4r65","slide":17,"text":"How I would present it live","textPreview":"How I would present it live","textChars":27,"textLines":1,"bbox":[42,34,960,88]}
+{"kind":"textbox","id":"sh/b2hwfyxo","slide":17,"text":"A short demo path makes the project easier for an employer to follow.","textPreview":"A short demo path makes the project easier for an employer to follow.","textChars":69,"textLines":1,"bbox":[42,122,900,44]}
+{"kind":"shape","id":"sh/mhk3q5o7","slide":17,"bbox":[42,176,1196,2]}
+{"kind":"textbox","id":"sh/twra5gbq","slide":17,"text":"17","textPreview":"17","textChars":2,"textLines":1,"bbox":[1184,660,54,24]}
+{"kind":"textbox","id":"sh/4byhgn29","slide":17,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[42,224,68,44]}
+{"kind":"textbox","id":"sh/bq1oryts","slide":17,"text":"Start with the customer story","textPreview":"Start with the customer story","textChars":29,"textLines":1,"bbox":[124,224,898,34]}
+{"kind":"textbox","id":"sh/m58z25kb","slide":17,"text":"Explain that the app supports registration, browsing, cart, checkout, and orders.","textPreview":"Explain that the app supports registration, browsing, cart, checkout, and orders.","textChars":81,"textLines":1,"bbox":[124,262,898,42]}
+{"kind":"textbox","id":"sh/tsvu9kni","slide":17,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[42,310,68,44]}
+{"kind":"textbox","id":"sh/47y1kre1","slide":17,"text":"Show the frontend","textPreview":"Show the frontend","textChars":17,"textLines":1,"bbox":[124,310,898,34]}
+{"kind":"textbox","id":"sh/adsji5sn","slide":17,"text":"Open the catalog, add a product, go to checkout, and place an order.","textPreview":"Open the catalog, add a product, go to checkout, and place an order.","textChars":68,"textLines":1,"bbox":[124,348,898,42]}
+{"kind":"textbox","id":"sh/3ylc7u54","slide":17,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[42,396,68,44]}
+{"kind":"textbox","id":"sh/sji5snel","slide":17,"text":"Show the backend structure","textPreview":"Show the backend structure","textChars":26,"textLines":1,"bbox":[124,396,898,34]}
+{"kind":"textbox","id":"sh/h4byhgn2","slide":17,"text":"Point to controllers, services, repositories, DTOs, models, and security config.","textPreview":"Point to controllers, services, repositories, DTOs, models, and security config.","textChars":80,"textLines":1,"bbox":[124,434,898,42]}
+{"kind":"textbox","id":"sh/a5gbq1or","slide":17,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[42,482,68,44]}
+{"kind":"textbox","id":"sh/3m94fu18","slide":17,"text":"Show one important test","textPreview":"Show one important test","textChars":23,"textLines":1,"bbox":[124,482,898,34]}
+{"kind":"textbox","id":"sh/s72x4nap","slide":17,"text":"Use the password-hashing test or checkout test to explain how behavior is verified.","textPreview":"Use the password-hashing test or checkout test to explain how behavior is verified.","textChars":83,"textLines":1,"bbox":[124,520,898,42]}
+{"kind":"textbox","id":"sh/lszqtcj6","slide":17,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[42,568,68,44]}
+{"kind":"textbox","id":"sh/a1gvy90j","slide":17,"text":"Close with next steps","textPreview":"Close with next steps","textChars":21,"textLines":1,"bbox":[124,568,898,34]}
+{"kind":"textbox","id":"sh/zidonyd0","slide":17,"text":"Explain what you would improve if this became a production application.","textPreview":"Explain what you would improve if this became a production application.","textChars":71,"textLines":1,"bbox":[124,606,898,42]}
+{"kind":"notes","id":"nt/yp6ifh","slide":17,"text":""}
+{"kind":"slide","id":"sl/n8acli","slide":18,"title":"Final takeaway","textShapes":5}
+{"kind":"textbox","id":"sh/d8bat47y","slide":18,"text":"Final takeaway","textPreview":"Final takeaway","textChars":14,"textLines":1,"bbox":[42,34,960,88]}
+{"kind":"shape","id":"sh/2lszqtcj","slide":18,"bbox":[42,176,1196,2]}
+{"kind":"textbox","id":"sh/v6psfil0","slide":18,"text":"18","textPreview":"18","textChars":2,"textLines":1,"bbox":[1184,660,54,24]}
+{"kind":"textbox","id":"sh/kf6dcbul","slide":18,"text":"EcommerceShop shows that I can build and explain a complete feature across the stack.","textPreview":"EcommerceShop shows that I can build and explain a complete feature across the stack.","textChars":85,"textLines":1,"bbox":[42,228,900,82]}
+{"kind":"textbox","id":"sh/d0z61032","slide":18,"text":"The strongest parts to discuss are the layered backend, checkout and stock rules, password hashing, isolated test database, and JUnit test coverage.","textPreview":"The strongest parts to discuss are the layered backend, checkout and stock rules, password hashing, isolated test database, and JUnit tes...","textChars":148,"textLines":1,"bbox":[42,352,980,74]}
+{"kind":"shape","id":"sh/29gr2p8n","slide":18,"bbox":[42,516,1110,74]}
+{"kind":"textbox","id":"sh/vu9knih4","slide":18,"text":"Suggested closing sentence: I built this project to practice end-to-end application development, not just isolated coding exercises.","textPreview":"Suggested closing sentence: I built this project to practice end-to-end application development, not just isolated coding exercises.","textChars":132,"textLines":1,"bbox":[72,538,1020,32]}
+{"kind":"notes","id":"nt/n8acli","slide":18,"text":""}

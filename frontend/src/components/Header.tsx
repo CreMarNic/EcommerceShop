@@ -1,4 +1,5 @@
 import { Link } from 'react-router';
+import type { KeyboardEvent } from 'react';
 import type { AuthenticatedUser } from '../api/ecommerceApi';
 import './Header.css';
 
@@ -6,23 +7,48 @@ type HeaderProps = {
     cartQuantity?: number;
     user?: AuthenticatedUser | null;
     onLogout: () => void;
+    onLogoClick?: () => void;
+    searchText?: string;
+    onSearchTextChange?: (value: string) => void;
+    onSearchSubmit?: () => void;
 };
 
-export function Header({ cartQuantity = 0, user, onLogout }: HeaderProps) {
+export function Header({
+    cartQuantity = 0,
+    user,
+    onLogout,
+    onLogoClick,
+    searchText = '',
+    onSearchTextChange,
+    onSearchSubmit,
+}: HeaderProps) {
+    function handleSearchKeyDown(event: KeyboardEvent<HTMLInputElement>) {
+        if (event.key === 'Enter') {
+            onSearchSubmit?.();
+        }
+    }
+
     return (
 
         <div className="header">
             <div className="left-section">
-                <Link to="/" className="header-link">
+                <Link to="/" className="header-link" onClick={onLogoClick}>
                     <span className="logo">EcommerceShop</span>
                     <span className="mobile-logo">ES</span>
                 </Link>
             </div>
 
             <div className="middle-section">
-                <input className="search-bar" type="text" placeholder="Search"/>
+                <input
+                    className="search-bar"
+                    type="text"
+                    placeholder="Search products"
+                    value={searchText}
+                    onChange={(event) => onSearchTextChange?.(event.target.value)}
+                    onKeyDown={handleSearchKeyDown}
+                />
 
-                <button className="search-button">
+                <button className="search-button" onClick={onSearchSubmit}>
                     <img className="search-icon" src="images/icons/search-icon.png"/>
                 </button>
             </div>
