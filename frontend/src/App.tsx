@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { clearAuth, getAuthenticatedUser, getStoredUser, hasStoredAuth } from './api/ecommerceApi'
+import {
+  clearAuth,
+  getAuthenticatedUser,
+  getStoredUser,
+  hasStoredAuth,
+  type AuthenticatedUser,
+} from './api/ecommerceApi'
 import { HomePage } from './components/HomePage'
 import { CheckoutPage } from './components/CheckoutPage'
 import { OrdersPage } from './components/OrdersPage'
@@ -8,7 +14,7 @@ import { SignInPage } from './components/SignInPage'
 
 function App() {
   const [authenticated, setAuthenticated] = useState(hasStoredAuth())
-  const [user, setUser] = useState(getStoredUser())
+  const [user, setUser] = useState<AuthenticatedUser | null>(getStoredUser())
   const [checkingLogin, setCheckingLogin] = useState(hasStoredAuth())
 
   useEffect(() => {
@@ -32,7 +38,7 @@ function App() {
         })
   }, [])
 
-  function handleAuthenticated(authenticatedUser) {
+  function handleAuthenticated(authenticatedUser: AuthenticatedUser) {
     setUser(authenticatedUser)
     setAuthenticated(true)
   }

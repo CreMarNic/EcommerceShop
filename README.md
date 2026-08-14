@@ -16,7 +16,6 @@ EcommerceShop/
   backend/    Spring Boot REST API
   frontend/   React/Vite web app
   data/       Local H2 database files
-  outputs/    Generated presentation/output files
 ```
 
 ## Backend
@@ -48,16 +47,6 @@ Available user routes:
 | `GET` | `/api/admin/users/{userId}` | Admin | Get one user |
 | `PUT` | `/api/admin/users/{userId}` | Admin | Update a user |
 | `DELETE` | `/api/admin/users/{userId}` | Admin | Delete a user |
-
-Registration request example:
-
-```json
-{
-  "name": "Jane Doe",
-  "email": "jane@example.com",
-  "password": "password123"
-}
-```
 
 ## Frontend and Backend Connection
 
@@ -161,13 +150,6 @@ Build the frontend:
 ```bash
 cd frontend
 npm run build
-```
-
-Lint the frontend:
-
-```bash
-cd frontend
-npm run lint
 ```
 
 ## Database
