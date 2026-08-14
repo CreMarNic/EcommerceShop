@@ -1,120 +1,72 @@
 package org.example.backend.security;
 
-import java.util.HashSet;
-
+import jakarta.servlet.http.HttpServletResponse;
+import org.example.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.util.StringUtils;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Configuration
-@EnableMethodSecurity
 public class SecurityConfig {
 
     @Bean
-    SecurityFilterChain securityFilterChain(
-            HttpSecurity http,
-            ObjectProvider<ClientRegistrationRepository> clientRegistrationRepository,
-            @Value("${app.frontend-url:http://localhost:5173}") String frontendUrl
-    ) throws Exception {
-        http
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http
                 .csrf(AbstractHttpConfigurer::disable)
+                .cors(Customizer.withDefaults())
+                .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
+                .httpBasic(httpBasic -> httpBasic.authenticationEntryPoint(restAuthenticationEntryPoint()))
+                .formLogin(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/", "/api/public/**", "/api/auth/login", "/oauth2/**", "/login/oauth2/**").permitAll()
+                        .requestMatchers("/h2-console/**").hasRole("ADMIN")
+                        .requestMatchers("/api/public/**").permitAll()
+                        .requestMatchers("/api/auth/me").authenticated()
+                        .requestMatchers("/api/users/**").authenticated()
+                        .requestMatchers("/api/orders/**").authenticated()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/api/user/**", "/api/orders/**", "/api/cart/**", "/api/checkout/**").hasRole("USER")
                         .anyRequest().authenticated()
                 )
-                .formLogin(form -> form
-                        .loginProcessingUrl("/api/auth/login")
-                        .successHandler((request, response, authentication) -> {
-                            response.setStatus(HttpServletResponse.SC_OK);
-                            response.setContentType("application/json");
-                            response.getWriter().write("""
-                                    {"message":"Login successful"}
-                                    """);
-                        })
-                        .failureHandler((request, response, exception) -> {
-                            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                            response.setContentType("application/json");
-                            response.getWriter().write("""
-                                    {"message":"Invalid username or password"}
-                                    """);
-                        })
-                )
-                .httpBasic(Customizer.withDefaults())
-                .logout(logout -> logout
-                        .logoutUrl("/api/auth/logout")
-                        .invalidateHttpSession(true)
-                        .deleteCookies("JSESSIONID")
-                        .logoutSuccessHandler((request, response, authentication) -> {
-                            response.setStatus(HttpServletResponse.SC_OK);
-                            response.setContentType("application/json");
-                            response.getWriter().write("""
-                                    {"message":"Logout successful"}
-                                    """);
-                        })
-                )
-                .exceptionHandling(exceptionHandling -> exceptionHandling
-                        .authenticationEntryPoint((request, response, exception) -> {
-                            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                            response.setContentType("application/json");
-                            response.getWriter().write("""
-                                    {"message":"Authentication required"}
-                                    """);
-                        })
-                        .accessDeniedHandler((request, response, exception) -> {
-                            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-                            response.setContentType("application/json");
-                            response.getWriter().write("""
-                                    {"message":"Access denied"}
-                            """);
-                        })
-                );
-
-        if (clientRegistrationRepository.getIfAvailable() != null) {
-            http.oauth2Login(oauth2 -> oauth2
-                    .defaultSuccessUrl(frontendUrl, true)
-                    .userInfoEndpoint(userInfo -> userInfo
-                            .userAuthoritiesMapper(oauthUserAuthoritiesMapper())
-                    )
-            );
-        }
-
-        return http.build();
+                .build();
     }
 
     @Bean
-    UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
-        var user = User.builder()
-                .username("user@example.com")
-                .password(passwordEncoder.encode("user123"))
-                .roles("USER")
-                .build();
+    AuthenticationEntryPoint restAuthenticationEntryPoint() {
+        return (request, response, authException) -> {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.setContentType("application/json");
+            response.getWriter().write("{\"message\":\"Authentication required\",\"status\":false}");
+        };
+    }
 
-        var admin = User.builder()
-                .username("admin@example.com")
-                .password(passwordEncoder.encode("admin123"))
-                .roles("USER", "ADMIN")
-                .build();
+    @Bean
+    CorsConfigurationSource corsConfigurationSource(
+            @Value("${app.frontend-url:http://localhost:5173}") String frontendUrl
+    ) {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(List.of(frontendUrl));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("*"));
+        configuration.setAllowCredentials(true);
 
-        return new InMemoryUserDetailsManager(user, admin);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/api/**", configuration);
+        return source;
     }
 
     @Bean
@@ -123,11 +75,30 @@ public class SecurityConfig {
     }
 
     @Bean
-    GrantedAuthoritiesMapper oauthUserAuthoritiesMapper() {
-        return authorities -> {
-            var mappedAuthorities = new HashSet<GrantedAuthority>(authorities);
-            mappedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-            return mappedAuthorities;
+    UserDetailsService userDetailsService(
+            UserRepository userRepository,
+            PasswordEncoder passwordEncoder,
+            @Value("${app.admin.username:admin@example.com}") String adminUsername,
+            @Value("${app.admin.password:}") String adminPassword
+    ) {
+        return username -> {
+            org.example.backend.model.User user = userRepository.findByEmail(username);
+
+            if (user != null) {
+                return org.springframework.security.core.userdetails.User.withUsername(user.getEmail())
+                        .password(user.getPassword())
+                        .roles(user.getEmail().equals(adminUsername) ? "ADMIN" : "USER")
+                        .build();
+            }
+
+            if (username.equals(adminUsername) && StringUtils.hasText(adminPassword)) {
+                return org.springframework.security.core.userdetails.User.withUsername(adminUsername)
+                        .password(passwordEncoder.encode(adminPassword))
+                        .roles("ADMIN")
+                        .build();
+            }
+
+            throw new UsernameNotFoundException("User not found: " + username);
         };
     }
 }
