@@ -34,7 +34,7 @@ public class SecurityConfig {
                 .httpBasic(httpBasic -> httpBasic.authenticationEntryPoint(restAuthenticationEntryPoint()))
                 .formLogin(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/h2-console/**").hasRole("ADMIN")
+                        .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/api/public/**").permitAll()
                         .requestMatchers("/api/auth/me").authenticated()
                         .requestMatchers("/api/users/**").authenticated()
