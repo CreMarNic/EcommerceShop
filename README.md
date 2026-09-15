@@ -1,44 +1,86 @@
-# EcommerceShop
+# 🛒 EcommerceShop
 
-EcommerceShop is a full-stack ecommerce demo application with a React frontend and a Spring Boot backend. Users can browse seeded products, register, sign in, manage a cart, checkout, and view orders.
+A full-stack e-commerce application built with **Java, Spring Boot, Spring Security, React, and TypeScript**.
 
-## Tech Stack
+The application provides product browsing, user registration and authentication, shopping cart management, checkout, order history, and role-based administration. The backend exposes REST APIs using Spring Boot and Spring Data JPA, while the React frontend communicates with the API through Axios.
 
-- Frontend: React, Vite, TypeScript, Axios, React Router
-- Backend: Java, Spring Boot, Spring MVC, Spring Security, Spring Data JPA
-- Database: H2 file database
-- Build tools: npm, Maven
+---
 
-## Project Structure
+## ✨ Key Features
+
+- User registration and authentication
+- Product catalog
+- Shopping cart management
+- Checkout and order creation
+- User order history
+- Admin product management
+- Admin user management
+- Admin order management
+- Role-based access for users and administrators
+- Persistent H2 database
+- REST API
+
+---
+
+## 🛠 Tech Stack
+
+### Backend
+
+- Java
+- Spring Boot
+- Spring MVC
+- Spring Security
+- Spring Data JPA
+- REST APIs
+- Maven
+
+### Frontend
+
+- React
+- TypeScript
+- Vite
+- React Router
+- Axios
+- HTML / CSS
+
+### Database
+
+- H2 file database
+
+### Security
+
+- Spring Security
+- HTTP Basic authentication
+- Role-based authorization
+
+---
+
+## 📁 Project Structure
 
 ```text
 EcommerceShop/
-  backend/    Spring Boot REST API
-  frontend/   React/Vite web app
-  data/       Local H2 database files
+├── backend/     # Spring Boot REST API
+├── frontend/    # React / TypeScript frontend
+└── data/        # Local H2 database files
 ```
 
-## Backend
+---
 
-The backend exposes REST endpoints under `/api`.
+## 🔌 Backend API
 
-Important controllers:
+The Spring Boot backend exposes REST endpoints under `/api`.
 
-- `UserController`: user registration and admin user management
-- `ProductController`: public product catalog and admin product management
-- `CartController`: authenticated cart actions
-- `OrderController`: checkout, order history, and admin order management
-- `AuthController`: returns the currently authenticated user
+### Main Controllers
 
-### User API
+- **UserController** — user registration and admin user management
+- **ProductController** — public product catalog and admin product management
+- **CartController** — authenticated shopping cart operations
+- **OrderController** — checkout, order history, and admin order management
+- **AuthController** — information about the currently authenticated user
 
-`UserController` is mapped with:
+### User Endpoints
 
-```java
-@RequestMapping("/api")
-```
-
-Available user routes:
+`UserController` is mapped under `/api`.
 
 | Method | Endpoint | Access | Description |
 | --- | --- | --- | --- |
@@ -48,9 +90,17 @@ Available user routes:
 | `PUT` | `/api/admin/users/{userId}` | Admin | Update a user |
 | `DELETE` | `/api/admin/users/{userId}` | Admin | Delete a user |
 
-## Frontend and Backend Connection
+---
 
-The frontend uses Axios in `frontend/src/api/ecommerceApi.ts`.
+## 🔗 Frontend & Backend Integration
+
+The React frontend communicates with the Spring Boot REST API through Axios.
+
+The Axios client is configured in:
+
+```text
+frontend/src/api/ecommerceApi.ts
+```
 
 ```ts
 const api = axios.create({
@@ -59,7 +109,7 @@ const api = axios.create({
 });
 ```
 
-During development, Vite proxies `/api` requests to the backend:
+During development, Vite proxies `/api` requests to the Spring Boot backend:
 
 ```ts
 server: {
@@ -71,7 +121,7 @@ server: {
 }
 ```
 
-So a frontend call like:
+For example:
 
 ```ts
 api.post('/public/users', request)
@@ -83,46 +133,148 @@ is sent to:
 http://localhost:8080/api/public/users
 ```
 
-## Authentication
+This keeps API calls simple on the frontend while allowing the frontend and backend to run on separate development servers.
 
-The app uses HTTP Basic authentication.
+---
 
-- Public routes are available under `/api/public/**`.
-- Authenticated user routes are under `/api/users/**`, `/api/orders/**`, and `/api/auth/me`.
-- Admin routes are under `/api/admin/**`.
-- The frontend stores the Basic Auth header in browser storage and sends it with protected API requests.
+## 🔐 Authentication & Authorization
 
-Admin credentials can be configured with environment variables:
+The application uses **Spring Security with HTTP Basic authentication** and role-based authorization.
+
+Access is divided into three areas:
+
+- **Public endpoints** — registration and product browsing
+- **Authenticated user endpoints** — cart management, checkout, order history, and current-user information
+- **Admin endpoints** — user, product, and order administration
+
+Backend routes are protected according to their required access level:
+
+- `/api/public/**` — public access
+- `/api/users/**`, `/api/orders/**`, `/api/auth/me` — authenticated users
+- `/api/admin/**` — administrators
+
+For this demo application, the frontend stores the Basic Authentication header in browser storage and includes it with protected API requests.
+
+> **Security note:** This authentication approach is intended for demonstration purposes. A production version should use a more robust authentication strategy and avoid storing reusable authentication credentials in browser storage.
+
+### Admin Configuration
+
+Admin credentials can be configured through environment variables:
 
 ```text
 ADMIN_USERNAME=admin@example.com
 ADMIN_PASSWORD=your-password
 ```
 
-If `ADMIN_PASSWORD` is set, the backend seeds or updates an admin user on startup.
+When `ADMIN_PASSWORD` is configured, the backend seeds or updates the administrator account during application startup.
 
-## Prerequisites
+---
+
+## 🗄 Database
+
+The backend uses **Spring Data JPA** for persistence and an **H2 file database** for local data storage.
+
+The application persists data related to:
+
+- Users and roles
+- Products
+- Shopping carts and cart items
+- Orders and order items
+
+The database is configured in:
+
+```text
+backend/src/main/resources/application.properties
+```
+
+with:
+
+```properties
+spring.datasource.url=jdbc:h2:file:./data/ecommerce;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE
+```
+
+Products are automatically seeded during application startup by `DataSeeder`.
+
+The H2 console is disabled by default and can be enabled for local development with:
+
+```text
+H2_CONSOLE_ENABLED=true
+```
+
+---
+
+## 🧪 Testing
+
+The backend includes automated tests using **JUnit 5** and **Mockito**.
+
+Current test coverage includes:
+
+- **ProductServiceImplUnitTests** — unit tests for product service logic
+- **UserServiceImplUnitTests** — unit tests for user service logic
+- **BackendApplicationTests** — verifies that the Spring application context loads successfully
+
+Run all backend tests with:
+
+```bash
+cd backend
+mvn test
+```
+
+The frontend can be type-checked and built with:
+
+```bash
+cd frontend
+npm run build
+```
+
+Frontend component and end-to-end tests are not currently included.
+
+---
+
+## 📋 Prerequisites
+
+Make sure the following tools are installed:
 
 - Java 25
 - Maven
-- Node.js and npm
+- Node.js
+- npm
 
-## Run Locally
+You can verify the installations with:
 
-Start the backend:
+```bash
+java -version
+mvn -version
+node -v
+npm -v
+```
+
+---
+
+## 🚀 Run Locally
+
+The frontend and backend run separately during local development.
+
+### 1. Start the Backend
+
+Open a terminal in the project directory:
 
 ```bash
 cd backend
 mvn spring-boot:run
 ```
 
-The backend runs on:
+The Spring Boot API will be available at:
 
 ```text
 http://localhost:8080
 ```
 
-Start the frontend in another terminal:
+Keep this terminal running.
+
+### 2. Start the Frontend
+
+Open another terminal:
 
 ```bash
 cd frontend
@@ -130,50 +282,34 @@ npm install
 npm run dev
 ```
 
-The frontend runs on:
+The React application will be available at:
 
 ```text
 http://localhost:5173
 ```
 
-## Useful Commands
+---
 
-Run backend tests:
+## 🛒 Main User Flow
 
-```bash
-cd backend
-mvn test
-```
+A typical user can:
 
-Build the frontend:
+1. Open the application.
+2. Register a new account.
+3. Sign in with an email address and password.
+4. Browse the product catalog.
+5. Add products to the shopping cart.
+6. Manage cart quantities.
+7. Complete checkout.
+8. View previous orders.
 
-```bash
-cd frontend
-npm run build
-```
+Administrators additionally have access to management functionality for users, products, and orders.
 
-## Database
+---
 
-The backend uses an H2 file database configured in `backend/src/main/resources/application.properties`:
+## 👨‍💻 Author
 
-```text
-spring.datasource.url=jdbc:h2:file:./data/ecommerce;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE
-```
+**Marius Cretu**  
+Java Full-Stack Developer
 
-Products are seeded automatically on startup by `DataSeeder`.
-
-The H2 console is disabled by default. It can be enabled with:
-
-```text
-H2_CONSOLE_ENABLED=true
-```
-
-## Main User Flow
-
-1. Open the frontend at `http://localhost:5173`.
-2. Register a new user.
-3. Sign in with the registered email and password.
-4. Browse products.
-5. Add products to the cart.
-6. Checkout.
-7. View orders.
+[Portfolio](https://cremarnic.github.io/Portfolio/) · [GitHub](https://github.com/CreMarNic) · [LinkedIn](https://www.linkedin.com/in/marius14cretu)
