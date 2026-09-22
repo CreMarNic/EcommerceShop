@@ -6,6 +6,10 @@ The application provides product browsing, user registration and authentication,
 
 ---
 
+## Screenshot
+
+![Ecommerce Shop product catalog and shopping cart](project-screenshot.png)
+
 ## ✨ Key Features
 
 - User registration and authentication
